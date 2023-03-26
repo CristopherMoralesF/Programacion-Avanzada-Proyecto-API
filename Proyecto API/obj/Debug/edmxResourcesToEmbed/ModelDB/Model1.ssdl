@@ -1,0 +1,711 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ASSET_MANAGEMENTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ACTIVO">
+    <Key>
+      <PropertyRef Name="ID_ACTIVO" />
+    </Key>
+    <Property Name="ID_ACTIVO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_CLASE" Type="int" Nullable="false" />
+    <Property Name="ID_UBICACION" Type="int" Nullable="false" />
+    <Property Name="ID_DUENNO" Type="int" Nullable="false" />
+    <Property Name="ID_ESTADO" Type="int" Nullable="false" />
+    <Property Name="DESCRIPCION_ACTIVO" Type="varchar" MaxLength="50" />
+    <Property Name="VALOR_ADQUISICION" Type="float" Nullable="false" />
+    <Property Name="FECHA_ADQUISICION" Type="date" />
+    <Property Name="PERIODOS_DEPRECIADOS" Type="int" />
+  </EntityType>
+  <EntityType Name="ASIENTO">
+    <Key>
+      <PropertyRef Name="ID_ASIENTO" />
+    </Key>
+    <Property Name="ID_ASIENTO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_CLASE" Type="int" />
+    <Property Name="FECHA" Type="date" Nullable="false" />
+    <Property Name="DESCRIPCION" Type="varchar" MaxLength="225" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ASIENTO_LINEA">
+    <Key>
+      <PropertyRef Name="ID_ASIENTO_LINEA" />
+    </Key>
+    <Property Name="ID_ASIENTO_LINEA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_ASIENTO" Type="int" Nullable="false" />
+    <Property Name="ID_CUENTA_CONTABLE" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="DESCRIPCION_LINEA" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="DEBITO" Type="float" Nullable="false" />
+    <Property Name="CREDITO" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CATEGORIA_CUENTA">
+    <Key>
+      <PropertyRef Name="ID_CATEGORIA" />
+    </Key>
+    <Property Name="ID_CATEGORIA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DESCRIPCION_CATEGORIA" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="CLASE">
+    <Key>
+      <PropertyRef Name="ID_CLASE" />
+    </Key>
+    <Property Name="ID_CLASE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DESCRIPCION_CLASE" Type="varchar" MaxLength="50" />
+    <Property Name="VIDA_UTIL" Type="int" />
+  </EntityType>
+  <EntityType Name="CLASE_CUENTA">
+    <Key>
+      <PropertyRef Name="ID_CLASE_CUENTA" />
+    </Key>
+    <Property Name="ID_CLASE_CUENTA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_CLASE" Type="int" Nullable="false" />
+    <Property Name="ID_CUENTA" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="ID_CATEGORIA_CUENTA" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CUENTA_CONTABLE">
+    <Key>
+      <PropertyRef Name="ID_CUENTA" />
+    </Key>
+    <Property Name="ID_CUENTA" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="DESCRIPCION_CUENTA" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ID_CATEGORIA" Type="int" Nullable="false" />
+    <Property Name="TOTAL_DEBITOS" Type="float" />
+    <Property Name="TOTAL_CREDITOS" Type="float" />
+    <Property Name="BALANCE" Type="float" />
+    <Property Name="NATURALEZA" Type="varchar" MaxLength="1" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EDIFICIO">
+    <Key>
+      <PropertyRef Name="ID_EDIFICIO" />
+    </Key>
+    <Property Name="ID_EDIFICIO" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="DESCRIPCION_EDIFICIO" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ESTADO">
+    <Key>
+      <PropertyRef Name="ID_ESTADO" />
+    </Key>
+    <Property Name="ID_ESTADO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DESCRIPCION_ESTADO" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="TIPO_VALIDACION">
+    <Key>
+      <PropertyRef Name="ID_TIPO_VALIDACION" />
+    </Key>
+    <Property Name="ID_TIPO_VALIDACION" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_CLASE" Type="int" Nullable="false" />
+    <Property Name="DESCRIPCION_VALIDACION" Type="varchar" MaxLength="60" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UBICACION">
+    <Key>
+      <PropertyRef Name="ID_UBICACION" />
+    </Key>
+    <Property Name="ID_UBICACION" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_EDIFICIO" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="DESCRIPCION_SECCION" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="USUARIO">
+    <Key>
+      <PropertyRef Name="ID_USUARIO" />
+    </Key>
+    <Property Name="ID_USUARIO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CORREO" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CONTRASENNA" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ID_ROLE" Type="int" Nullable="false" />
+    <Property Name="ESTADO" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="USUARIO_ROLE">
+    <Key>
+      <PropertyRef Name="ID_ROLE" />
+    </Key>
+    <Property Name="ID_ROLE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NOMBRE_ROLE" Type="varchar" MaxLength="50" />
+    <Property Name="DESCRIPCION_PERMISOS" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="VALIDACION">
+    <Key>
+      <PropertyRef Name="ID_VALIDACION" />
+    </Key>
+    <Property Name="ID_VALIDACION" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_TIPO_VALIDACION" Type="int" Nullable="false" />
+    <Property Name="ID_ACTIVO" Type="int" Nullable="false" />
+    <Property Name="VALOR" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ASSET_MANAGEMENT.dbo.ACCOUNTS_BALANCE_RESUME' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="ACCOUNTS_BALANCE_RESUME">
+    <Key>
+      <PropertyRef Name="ID_CUENTA" />
+      <PropertyRef Name="DESCRIPCION_CUENTA" />
+      <PropertyRef Name="NATURALEZA" />
+    </Key>
+    <Property Name="ID_CUENTA" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="DESCRIPCION_CUENTA" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="NATURALEZA" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="DESCRIPCION_CATEGORIA" Type="varchar" MaxLength="50" />
+    <Property Name="TOTAL_DEBITOS" Type="float" />
+    <Property Name="TOTAL_CREDITOS" Type="float" />
+    <Property Name="BALANCE" Type="float" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ASSET_MANAGEMENT.dbo.ACCOUNTS_RESUME' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="ACCOUNTS_RESUME">
+    <Key>
+      <PropertyRef Name="ID_CUENTA" />
+      <PropertyRef Name="DESCRIPCION_CUENTA" />
+      <PropertyRef Name="ID_CATEGORIA" />
+    </Key>
+    <Property Name="ID_CUENTA" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="DESCRIPCION_CUENTA" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ID_CATEGORIA" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ASSET_MANAGEMENT.dbo.AUXILIAR_DEPRECIACION' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="AUXILIAR_DEPRECIACION">
+    <Key>
+      <PropertyRef Name="VALOR_ADQUISICION" />
+      <PropertyRef Name="ID_CLASE" />
+    </Key>
+    <Property Name="DESCRIPCION_ACTIVO" Type="varchar" MaxLength="50" />
+    <Property Name="VALOR_ADQUISICION" Type="float" Nullable="false" />
+    <Property Name="FECHA_ADQUISICION" Type="date" />
+    <Property Name="PERIODOS_DEPRECIADOS" Type="int" />
+    <Property Name="DESCRIPCION_CLASE" Type="varchar" MaxLength="50" />
+    <Property Name="VIDA_UTIL" Type="int" />
+    <Property Name="ID_CLASE" Type="int" Nullable="false" />
+    <Property Name="DEPRECIACION_MENSUAL" Type="float" />
+    <Property Name="DEPRECIACION_ACUMULADA" Type="float" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ASSET_MANAGEMENT.dbo.CLASSES_LIST' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="CLASSES_LIST">
+    <Key>
+      <PropertyRef Name="ID_CLASE" />
+    </Key>
+    <Property Name="ID_CLASE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DESCRIPCION_CLASE" Type="varchar" MaxLength="50" />
+    <Property Name="CUENTA_ACTIVO" Type="varchar" MaxLength="15" />
+    <Property Name="CUENTA_GASTO" Type="varchar" MaxLength="15" />
+    <Property Name="CUENTA_DEP_ACUMULADA" Type="varchar" MaxLength="15" />
+    <Property Name="VIDA_UTIL" Type="int" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ASSET_MANAGEMENT.dbo.CONCILIACION_BALANCE_CLASE' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="CONCILIACION_BALANCE_CLASE">
+    <Key>
+      <PropertyRef Name="ID_CLASE" />
+      <PropertyRef Name="ID_CUENTA" />
+    </Key>
+    <Property Name="ID_CLASE" Type="int" Nullable="false" />
+    <Property Name="ID_CUENTA" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="CATEGORIA_CUENTA" Type="varchar" MaxLength="59" />
+    <Property Name="DESCRIPCION_CLASE" Type="varchar" MaxLength="50" />
+    <Property Name="BALANCE" Type="float" />
+    <Property Name="VALOR_AUXILIAR" Type="float" />
+    <Property Name="DIFERENCIA" Type="float" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ASSET_MANAGEMENT.dbo.RESUMEN_ACTIVOS' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="RESUMEN_ACTIVOS">
+    <Key>
+      <PropertyRef Name="ID_ACTIVO" />
+      <PropertyRef Name="VALOR_ADQUISICION" />
+      <PropertyRef Name="ID_EDIFICIO" />
+      <PropertyRef Name="DESCRIPCION_SECCION" />
+      <PropertyRef Name="NOMBRE" />
+      <PropertyRef Name="DESCRIPCION_ESTADO" />
+    </Key>
+    <Property Name="ID_ACTIVO" Type="int" Nullable="false" />
+    <Property Name="DESCRIPCION_ACTIVO" Type="varchar" MaxLength="50" />
+    <Property Name="VALOR_ADQUISICION" Type="float" Nullable="false" />
+    <Property Name="FECHA_ADQUISICION" Type="date" />
+    <Property Name="DESCRIPCION_CLASE" Type="varchar" MaxLength="50" />
+    <Property Name="VIDA_UTIL" Type="int" />
+    <Property Name="PERIODOS_DEPRECIADOS" Type="int" />
+    <Property Name="ID_EDIFICIO" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="DESCRIPCION_SECCION" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DESCRIPCION_ESTADO" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ASSET_MANAGEMENT.dbo.RESUMEN_ASIENTO_LINEAS' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="RESUMEN_ASIENTO_LINEAS">
+    <Key>
+      <PropertyRef Name="ID_ASIENTO_LINEA" />
+      <PropertyRef Name="ID_CUENTA_CONTABLE" />
+      <PropertyRef Name="DESCRIPCION_LINEA" />
+      <PropertyRef Name="DEBITO" />
+      <PropertyRef Name="CREDITO" />
+      <PropertyRef Name="BALANCE" />
+    </Key>
+    <Property Name="ID_ASIENTO_LINEA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_CUENTA_CONTABLE" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="DESCRIPCION_LINEA" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="DEBITO" Type="float" Nullable="false" />
+    <Property Name="CREDITO" Type="float" Nullable="false" />
+    <Property Name="BALANCE" Type="float" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ASSET_MANAGEMENT.dbo.RESUMEN_ASIENTOS' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="RESUMEN_ASIENTOS">
+    <Key>
+      <PropertyRef Name="ID_ASIENTO" />
+      <PropertyRef Name="FECHA" />
+      <PropertyRef Name="DESCRIPCION" />
+    </Key>
+    <Property Name="ID_ASIENTO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FECHA" Type="date" Nullable="false" />
+    <Property Name="DESCRIPCION" Type="varchar" MaxLength="225" Nullable="false" />
+    <Property Name="DESCRIPCION_CLASE" Type="varchar" MaxLength="50" />
+    <Property Name="TOTAL_ASIENTO" Type="float" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ASSET_MANAGEMENT.dbo.RESUMEN_USUARIOS' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="RESUMEN_USUARIOS">
+    <Key>
+      <PropertyRef Name="ID_USUARIO" />
+      <PropertyRef Name="NOMBRE" />
+      <PropertyRef Name="CORREO" />
+      <PropertyRef Name="CONTRASENNA" />
+      <PropertyRef Name="ID_ROLE" />
+      <PropertyRef Name="ESTADO" />
+    </Key>
+    <Property Name="ID_USUARIO" Type="int" Nullable="false" />
+    <Property Name="NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CORREO" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CONTRASENNA" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ID_ROLE" Type="int" Nullable="false" />
+    <Property Name="ESTADO" Type="int" Nullable="false" />
+    <Property Name="NOMBRE_ROLE" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ASSET_MANAGEMENT.dbo.VALIDACIONES_RESUMEN' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="VALIDACIONES_RESUMEN">
+    <Key>
+      <PropertyRef Name="ID_TIPO_VALIDACION" />
+      <PropertyRef Name="ID_CLASE" />
+      <PropertyRef Name="DESCRIPCION_VALIDACION" />
+    </Key>
+    <Property Name="ID_TIPO_VALIDACION" Type="int" Nullable="false" />
+    <Property Name="ID_CLASE" Type="int" Nullable="false" />
+    <Property Name="DESCRIPCION_VALIDACION" Type="varchar" MaxLength="60" Nullable="false" />
+    <Property Name="DESCRIPCION_CLASE" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_ACTIVO_CLASE">
+    <End Role="CLASE" Type="Self.CLASE" Multiplicity="1" />
+    <End Role="ACTIVO" Type="Self.ACTIVO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CLASE">
+        <PropertyRef Name="ID_CLASE" />
+      </Principal>
+      <Dependent Role="ACTIVO">
+        <PropertyRef Name="ID_CLASE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ACTIVO_DUENNO">
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+    <End Role="ACTIVO" Type="Self.ACTIVO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO">
+        <PropertyRef Name="ID_USUARIO" />
+      </Principal>
+      <Dependent Role="ACTIVO">
+        <PropertyRef Name="ID_DUENNO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ACTIVO_ESTADO">
+    <End Role="ESTADO" Type="Self.ESTADO" Multiplicity="1" />
+    <End Role="ACTIVO" Type="Self.ACTIVO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ESTADO">
+        <PropertyRef Name="ID_ESTADO" />
+      </Principal>
+      <Dependent Role="ACTIVO">
+        <PropertyRef Name="ID_ESTADO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ACTIVO_UBICACION">
+    <End Role="UBICACION" Type="Self.UBICACION" Multiplicity="1" />
+    <End Role="ACTIVO" Type="Self.ACTIVO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UBICACION">
+        <PropertyRef Name="ID_UBICACION" />
+      </Principal>
+      <Dependent Role="ACTIVO">
+        <PropertyRef Name="ID_UBICACION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ASIENTO_CUENTA">
+    <End Role="CUENTA_CONTABLE" Type="Self.CUENTA_CONTABLE" Multiplicity="1" />
+    <End Role="ASIENTO_LINEA" Type="Self.ASIENTO_LINEA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CUENTA_CONTABLE">
+        <PropertyRef Name="ID_CUENTA" />
+      </Principal>
+      <Dependent Role="ASIENTO_LINEA">
+        <PropertyRef Name="ID_CUENTA_CONTABLE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ASIENTO_LINEA">
+    <End Role="ASIENTO" Type="Self.ASIENTO" Multiplicity="1" />
+    <End Role="ASIENTO_LINEA" Type="Self.ASIENTO_LINEA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ASIENTO">
+        <PropertyRef Name="ID_ASIENTO" />
+      </Principal>
+      <Dependent Role="ASIENTO_LINEA">
+        <PropertyRef Name="ID_ASIENTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CATEGORIA_CLASECUENTA">
+    <End Role="CATEGORIA_CUENTA" Type="Self.CATEGORIA_CUENTA" Multiplicity="1" />
+    <End Role="CLASE_CUENTA" Type="Self.CLASE_CUENTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CATEGORIA_CUENTA">
+        <PropertyRef Name="ID_CATEGORIA" />
+      </Principal>
+      <Dependent Role="CLASE_CUENTA">
+        <PropertyRef Name="ID_CATEGORIA_CUENTA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CLASE_CLASECUENTA">
+    <End Role="CLASE" Type="Self.CLASE" Multiplicity="1" />
+    <End Role="CLASE_CUENTA" Type="Self.CLASE_CUENTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CLASE">
+        <PropertyRef Name="ID_CLASE" />
+      </Principal>
+      <Dependent Role="CLASE_CUENTA">
+        <PropertyRef Name="ID_CLASE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CLASE_VALIDACION">
+    <End Role="CLASE" Type="Self.CLASE" Multiplicity="1" />
+    <End Role="TIPO_VALIDACION" Type="Self.TIPO_VALIDACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CLASE">
+        <PropertyRef Name="ID_CLASE" />
+      </Principal>
+      <Dependent Role="TIPO_VALIDACION">
+        <PropertyRef Name="ID_CLASE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CUENTA_CATEGORIA">
+    <End Role="CATEGORIA_CUENTA" Type="Self.CATEGORIA_CUENTA" Multiplicity="1" />
+    <End Role="CUENTA_CONTABLE" Type="Self.CUENTA_CONTABLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CATEGORIA_CUENTA">
+        <PropertyRef Name="ID_CATEGORIA" />
+      </Principal>
+      <Dependent Role="CUENTA_CONTABLE">
+        <PropertyRef Name="ID_CATEGORIA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CUENTA_CLASECUENTA">
+    <End Role="CUENTA_CONTABLE" Type="Self.CUENTA_CONTABLE" Multiplicity="1" />
+    <End Role="CLASE_CUENTA" Type="Self.CLASE_CUENTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CUENTA_CONTABLE">
+        <PropertyRef Name="ID_CUENTA" />
+      </Principal>
+      <Dependent Role="CLASE_CUENTA">
+        <PropertyRef Name="ID_CUENTA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EDIFICIO_UBICACION">
+    <End Role="EDIFICIO" Type="Self.EDIFICIO" Multiplicity="1" />
+    <End Role="UBICACION" Type="Self.UBICACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EDIFICIO">
+        <PropertyRef Name="ID_EDIFICIO" />
+      </Principal>
+      <Dependent Role="UBICACION">
+        <PropertyRef Name="ID_EDIFICIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ROLE_USUARIO">
+    <End Role="USUARIO_ROLE" Type="Self.USUARIO_ROLE" Multiplicity="1" />
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO_ROLE">
+        <PropertyRef Name="ID_ROLE" />
+      </Principal>
+      <Dependent Role="USUARIO">
+        <PropertyRef Name="ID_ROLE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VALIDACION_ACTIVO">
+    <End Role="ACTIVO" Type="Self.ACTIVO" Multiplicity="1" />
+    <End Role="VALIDACION" Type="Self.VALIDACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ACTIVO">
+        <PropertyRef Name="ID_ACTIVO" />
+      </Principal>
+      <Dependent Role="VALIDACION">
+        <PropertyRef Name="ID_ACTIVO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VALIDACION_TIPO">
+    <End Role="TIPO_VALIDACION" Type="Self.TIPO_VALIDACION" Multiplicity="1" />
+    <End Role="VALIDACION" Type="Self.VALIDACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TIPO_VALIDACION">
+        <PropertyRef Name="ID_TIPO_VALIDACION" />
+      </Principal>
+      <Dependent Role="VALIDACION">
+        <PropertyRef Name="ID_TIPO_VALIDACION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PK_ASIENTO_ACTIVO">
+    <End Role="CLASE" Type="Self.CLASE" Multiplicity="0..1" />
+    <End Role="ASIENTO" Type="Self.ASIENTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CLASE">
+        <PropertyRef Name="ID_CLASE" />
+      </Principal>
+      <Dependent Role="ASIENTO">
+        <PropertyRef Name="ID_CLASE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="ACTIVAR_USUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID_USUARIO" Type="int" Mode="In" />
+  </Function>
+  <Function Name="ACTUALIZAR_INFORMACION_VALIDACION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IN_ID_ASIENTO" Type="int" Mode="In" />
+    <Parameter Name="IN_ID_TIPO_VALIDACION" Type="int" Mode="In" />
+    <Parameter Name="IN_VALOR_VALIDACION" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="CORRER_DEPRECIACION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IN_ID_CLASE" Type="int" Mode="In" />
+    <Parameter Name="IN_JE_DESCRIPCION" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="CREAR_CLASE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IN_CLASS_DESCRIPTION" Type="varchar" Mode="In" />
+    <Parameter Name="IN_ASSET_ACCOUNT" Type="varchar" Mode="In" />
+    <Parameter Name="IN_DEP_ACUM_ACCOUNT" Type="varchar" Mode="In" />
+    <Parameter Name="IN_EXPENSE_ACCOUNT" Type="varchar" Mode="In" />
+    <Parameter Name="IN_USEFULL_LIFE" Type="int" Mode="In" />
+  </Function>
+  <Function Name="DESACTIVAR_USUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID_USUARIO" Type="int" Mode="In" />
+  </Function>
+  <Function Name="ESTATUS_ACTIVOS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IN_ID_USUARIO" Type="int" Mode="In" />
+  </Function>
+  <Function Name="RESUMEN_ASIENTO_LINEAS_BODY" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IN_ASIENTO_ID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="VALIDAR_USUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IN_EMAIL" Type="varchar" Mode="In" />
+    <Parameter Name="IN_CONTRASENNA" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="ASSET_MANAGEMENTModelStoreContainer">
+    <EntitySet Name="ACTIVO" EntityType="Self.ACTIVO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ASIENTO" EntityType="Self.ASIENTO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ASIENTO_LINEA" EntityType="Self.ASIENTO_LINEA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CATEGORIA_CUENTA" EntityType="Self.CATEGORIA_CUENTA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CLASE" EntityType="Self.CLASE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CLASE_CUENTA" EntityType="Self.CLASE_CUENTA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CUENTA_CONTABLE" EntityType="Self.CUENTA_CONTABLE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EDIFICIO" EntityType="Self.EDIFICIO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ESTADO" EntityType="Self.ESTADO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TIPO_VALIDACION" EntityType="Self.TIPO_VALIDACION" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UBICACION" EntityType="Self.UBICACION" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="USUARIO_ROLE" EntityType="Self.USUARIO_ROLE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VALIDACION" EntityType="Self.VALIDACION" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ACCOUNTS_BALANCE_RESUME" EntityType="Self.ACCOUNTS_BALANCE_RESUME" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ACCOUNTS_BALANCE_RESUME].[ID_CUENTA] AS [ID_CUENTA], 
+    [ACCOUNTS_BALANCE_RESUME].[DESCRIPCION_CUENTA] AS [DESCRIPCION_CUENTA], 
+    [ACCOUNTS_BALANCE_RESUME].[NATURALEZA] AS [NATURALEZA], 
+    [ACCOUNTS_BALANCE_RESUME].[DESCRIPCION_CATEGORIA] AS [DESCRIPCION_CATEGORIA], 
+    [ACCOUNTS_BALANCE_RESUME].[TOTAL_DEBITOS] AS [TOTAL_DEBITOS], 
+    [ACCOUNTS_BALANCE_RESUME].[TOTAL_CREDITOS] AS [TOTAL_CREDITOS], 
+    [ACCOUNTS_BALANCE_RESUME].[BALANCE] AS [BALANCE]
+    FROM [dbo].[ACCOUNTS_BALANCE_RESUME] AS [ACCOUNTS_BALANCE_RESUME]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="ACCOUNTS_RESUME" EntityType="Self.ACCOUNTS_RESUME" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ACCOUNTS_RESUME].[ID_CUENTA] AS [ID_CUENTA], 
+    [ACCOUNTS_RESUME].[DESCRIPCION_CUENTA] AS [DESCRIPCION_CUENTA], 
+    [ACCOUNTS_RESUME].[ID_CATEGORIA] AS [ID_CATEGORIA]
+    FROM [dbo].[ACCOUNTS_RESUME] AS [ACCOUNTS_RESUME]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="AUXILIAR_DEPRECIACION" EntityType="Self.AUXILIAR_DEPRECIACION" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [AUXILIAR_DEPRECIACION].[DESCRIPCION_ACTIVO] AS [DESCRIPCION_ACTIVO], 
+    [AUXILIAR_DEPRECIACION].[VALOR_ADQUISICION] AS [VALOR_ADQUISICION], 
+    [AUXILIAR_DEPRECIACION].[FECHA_ADQUISICION] AS [FECHA_ADQUISICION], 
+    [AUXILIAR_DEPRECIACION].[PERIODOS_DEPRECIADOS] AS [PERIODOS_DEPRECIADOS], 
+    [AUXILIAR_DEPRECIACION].[DESCRIPCION_CLASE] AS [DESCRIPCION_CLASE], 
+    [AUXILIAR_DEPRECIACION].[VIDA_UTIL] AS [VIDA_UTIL], 
+    [AUXILIAR_DEPRECIACION].[ID_CLASE] AS [ID_CLASE], 
+    [AUXILIAR_DEPRECIACION].[DEPRECIACION_MENSUAL] AS [DEPRECIACION_MENSUAL], 
+    [AUXILIAR_DEPRECIACION].[DEPRECIACION_ACUMULADA] AS [DEPRECIACION_ACUMULADA]
+    FROM [dbo].[AUXILIAR_DEPRECIACION] AS [AUXILIAR_DEPRECIACION]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="CLASSES_LIST" EntityType="Self.CLASSES_LIST" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [CLASSES_LIST].[ID_CLASE] AS [ID_CLASE], 
+    [CLASSES_LIST].[DESCRIPCION_CLASE] AS [DESCRIPCION_CLASE], 
+    [CLASSES_LIST].[CUENTA_ACTIVO] AS [CUENTA_ACTIVO], 
+    [CLASSES_LIST].[CUENTA_GASTO] AS [CUENTA_GASTO], 
+    [CLASSES_LIST].[CUENTA_DEP_ACUMULADA] AS [CUENTA_DEP_ACUMULADA], 
+    [CLASSES_LIST].[VIDA_UTIL] AS [VIDA_UTIL]
+    FROM [dbo].[CLASSES_LIST] AS [CLASSES_LIST]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="CONCILIACION_BALANCE_CLASE" EntityType="Self.CONCILIACION_BALANCE_CLASE" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [CONCILIACION_BALANCE_CLASE].[ID_CLASE] AS [ID_CLASE], 
+    [CONCILIACION_BALANCE_CLASE].[ID_CUENTA] AS [ID_CUENTA], 
+    [CONCILIACION_BALANCE_CLASE].[CATEGORIA_CUENTA] AS [CATEGORIA_CUENTA], 
+    [CONCILIACION_BALANCE_CLASE].[DESCRIPCION_CLASE] AS [DESCRIPCION_CLASE], 
+    [CONCILIACION_BALANCE_CLASE].[BALANCE] AS [BALANCE], 
+    [CONCILIACION_BALANCE_CLASE].[VALOR_AUXILIAR] AS [VALOR_AUXILIAR], 
+    [CONCILIACION_BALANCE_CLASE].[DIFERENCIA] AS [DIFERENCIA]
+    FROM [dbo].[CONCILIACION_BALANCE_CLASE] AS [CONCILIACION_BALANCE_CLASE]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="RESUMEN_ACTIVOS" EntityType="Self.RESUMEN_ACTIVOS" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [RESUMEN_ACTIVOS].[ID_ACTIVO] AS [ID_ACTIVO], 
+    [RESUMEN_ACTIVOS].[DESCRIPCION_ACTIVO] AS [DESCRIPCION_ACTIVO], 
+    [RESUMEN_ACTIVOS].[VALOR_ADQUISICION] AS [VALOR_ADQUISICION], 
+    [RESUMEN_ACTIVOS].[FECHA_ADQUISICION] AS [FECHA_ADQUISICION], 
+    [RESUMEN_ACTIVOS].[DESCRIPCION_CLASE] AS [DESCRIPCION_CLASE], 
+    [RESUMEN_ACTIVOS].[VIDA_UTIL] AS [VIDA_UTIL], 
+    [RESUMEN_ACTIVOS].[PERIODOS_DEPRECIADOS] AS [PERIODOS_DEPRECIADOS], 
+    [RESUMEN_ACTIVOS].[ID_EDIFICIO] AS [ID_EDIFICIO], 
+    [RESUMEN_ACTIVOS].[DESCRIPCION_SECCION] AS [DESCRIPCION_SECCION], 
+    [RESUMEN_ACTIVOS].[NOMBRE] AS [NOMBRE], 
+    [RESUMEN_ACTIVOS].[DESCRIPCION_ESTADO] AS [DESCRIPCION_ESTADO]
+    FROM [dbo].[RESUMEN_ACTIVOS] AS [RESUMEN_ACTIVOS]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="RESUMEN_ASIENTO_LINEAS" EntityType="Self.RESUMEN_ASIENTO_LINEAS" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [RESUMEN_ASIENTO_LINEAS].[ID_ASIENTO_LINEA] AS [ID_ASIENTO_LINEA], 
+    [RESUMEN_ASIENTO_LINEAS].[ID_CUENTA_CONTABLE] AS [ID_CUENTA_CONTABLE], 
+    [RESUMEN_ASIENTO_LINEAS].[DESCRIPCION_LINEA] AS [DESCRIPCION_LINEA], 
+    [RESUMEN_ASIENTO_LINEAS].[DEBITO] AS [DEBITO], 
+    [RESUMEN_ASIENTO_LINEAS].[CREDITO] AS [CREDITO], 
+    [RESUMEN_ASIENTO_LINEAS].[BALANCE] AS [BALANCE]
+    FROM [dbo].[RESUMEN_ASIENTO_LINEAS] AS [RESUMEN_ASIENTO_LINEAS]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="RESUMEN_ASIENTOS" EntityType="Self.RESUMEN_ASIENTOS" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [RESUMEN_ASIENTOS].[ID_ASIENTO] AS [ID_ASIENTO], 
+    [RESUMEN_ASIENTOS].[FECHA] AS [FECHA], 
+    [RESUMEN_ASIENTOS].[DESCRIPCION] AS [DESCRIPCION], 
+    [RESUMEN_ASIENTOS].[DESCRIPCION_CLASE] AS [DESCRIPCION_CLASE], 
+    [RESUMEN_ASIENTOS].[TOTAL_ASIENTO] AS [TOTAL_ASIENTO]
+    FROM [dbo].[RESUMEN_ASIENTOS] AS [RESUMEN_ASIENTOS]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="RESUMEN_USUARIOS" EntityType="Self.RESUMEN_USUARIOS" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [RESUMEN_USUARIOS].[ID_USUARIO] AS [ID_USUARIO], 
+    [RESUMEN_USUARIOS].[NOMBRE] AS [NOMBRE], 
+    [RESUMEN_USUARIOS].[CORREO] AS [CORREO], 
+    [RESUMEN_USUARIOS].[CONTRASENNA] AS [CONTRASENNA], 
+    [RESUMEN_USUARIOS].[ID_ROLE] AS [ID_ROLE], 
+    [RESUMEN_USUARIOS].[ESTADO] AS [ESTADO], 
+    [RESUMEN_USUARIOS].[NOMBRE_ROLE] AS [NOMBRE_ROLE]
+    FROM [dbo].[RESUMEN_USUARIOS] AS [RESUMEN_USUARIOS]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="VALIDACIONES_RESUMEN" EntityType="Self.VALIDACIONES_RESUMEN" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [VALIDACIONES_RESUMEN].[ID_TIPO_VALIDACION] AS [ID_TIPO_VALIDACION], 
+    [VALIDACIONES_RESUMEN].[ID_CLASE] AS [ID_CLASE], 
+    [VALIDACIONES_RESUMEN].[DESCRIPCION_VALIDACION] AS [DESCRIPCION_VALIDACION], 
+    [VALIDACIONES_RESUMEN].[DESCRIPCION_CLASE] AS [DESCRIPCION_CLASE]
+    FROM [dbo].[VALIDACIONES_RESUMEN] AS [VALIDACIONES_RESUMEN]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_ACTIVO_CLASE" Association="Self.FK_ACTIVO_CLASE">
+      <End Role="CLASE" EntitySet="CLASE" />
+      <End Role="ACTIVO" EntitySet="ACTIVO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ACTIVO_DUENNO" Association="Self.FK_ACTIVO_DUENNO">
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="ACTIVO" EntitySet="ACTIVO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ACTIVO_ESTADO" Association="Self.FK_ACTIVO_ESTADO">
+      <End Role="ESTADO" EntitySet="ESTADO" />
+      <End Role="ACTIVO" EntitySet="ACTIVO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ACTIVO_UBICACION" Association="Self.FK_ACTIVO_UBICACION">
+      <End Role="UBICACION" EntitySet="UBICACION" />
+      <End Role="ACTIVO" EntitySet="ACTIVO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ASIENTO_CUENTA" Association="Self.FK_ASIENTO_CUENTA">
+      <End Role="CUENTA_CONTABLE" EntitySet="CUENTA_CONTABLE" />
+      <End Role="ASIENTO_LINEA" EntitySet="ASIENTO_LINEA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ASIENTO_LINEA" Association="Self.FK_ASIENTO_LINEA">
+      <End Role="ASIENTO" EntitySet="ASIENTO" />
+      <End Role="ASIENTO_LINEA" EntitySet="ASIENTO_LINEA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CATEGORIA_CLASECUENTA" Association="Self.FK_CATEGORIA_CLASECUENTA">
+      <End Role="CATEGORIA_CUENTA" EntitySet="CATEGORIA_CUENTA" />
+      <End Role="CLASE_CUENTA" EntitySet="CLASE_CUENTA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CLASE_CLASECUENTA" Association="Self.FK_CLASE_CLASECUENTA">
+      <End Role="CLASE" EntitySet="CLASE" />
+      <End Role="CLASE_CUENTA" EntitySet="CLASE_CUENTA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CLASE_VALIDACION" Association="Self.FK_CLASE_VALIDACION">
+      <End Role="CLASE" EntitySet="CLASE" />
+      <End Role="TIPO_VALIDACION" EntitySet="TIPO_VALIDACION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CUENTA_CATEGORIA" Association="Self.FK_CUENTA_CATEGORIA">
+      <End Role="CATEGORIA_CUENTA" EntitySet="CATEGORIA_CUENTA" />
+      <End Role="CUENTA_CONTABLE" EntitySet="CUENTA_CONTABLE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CUENTA_CLASECUENTA" Association="Self.FK_CUENTA_CLASECUENTA">
+      <End Role="CUENTA_CONTABLE" EntitySet="CUENTA_CONTABLE" />
+      <End Role="CLASE_CUENTA" EntitySet="CLASE_CUENTA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EDIFICIO_UBICACION" Association="Self.FK_EDIFICIO_UBICACION">
+      <End Role="EDIFICIO" EntitySet="EDIFICIO" />
+      <End Role="UBICACION" EntitySet="UBICACION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ROLE_USUARIO" Association="Self.FK_ROLE_USUARIO">
+      <End Role="USUARIO_ROLE" EntitySet="USUARIO_ROLE" />
+      <End Role="USUARIO" EntitySet="USUARIO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VALIDACION_ACTIVO" Association="Self.FK_VALIDACION_ACTIVO">
+      <End Role="ACTIVO" EntitySet="ACTIVO" />
+      <End Role="VALIDACION" EntitySet="VALIDACION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VALIDACION_TIPO" Association="Self.FK_VALIDACION_TIPO">
+      <End Role="TIPO_VALIDACION" EntitySet="TIPO_VALIDACION" />
+      <End Role="VALIDACION" EntitySet="VALIDACION" />
+    </AssociationSet>
+    <AssociationSet Name="PK_ASIENTO_ACTIVO" Association="Self.PK_ASIENTO_ACTIVO">
+      <End Role="CLASE" EntitySet="CLASE" />
+      <End Role="ASIENTO" EntitySet="ASIENTO" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

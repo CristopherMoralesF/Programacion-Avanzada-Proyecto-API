@@ -1,0 +1,658 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ASSET_MANAGEMENTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ACTIVO">
+    <Key>
+      <PropertyRef Name="ID_ACTIVO" />
+    </Key>
+    <Property Name="ID_ACTIVO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_CLASE" Type="Int32" Nullable="false" />
+    <Property Name="ID_UBICACION" Type="Int32" Nullable="false" />
+    <Property Name="ID_DUENNO" Type="Int32" Nullable="false" />
+    <Property Name="ID_ESTADO" Type="Int32" Nullable="false" />
+    <Property Name="DESCRIPCION_ACTIVO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="VALOR_ADQUISICION" Type="Double" Nullable="false" />
+    <Property Name="FECHA_ADQUISICION" Type="DateTime" Precision="0" />
+    <Property Name="PERIODOS_DEPRECIADOS" Type="Int32" />
+    <NavigationProperty Name="CLASE" Relationship="Self.FK_ACTIVO_CLASE" FromRole="ACTIVO" ToRole="CLASE" />
+    <NavigationProperty Name="USUARIO" Relationship="Self.FK_ACTIVO_DUENNO" FromRole="ACTIVO" ToRole="USUARIO" />
+    <NavigationProperty Name="ESTADO" Relationship="Self.FK_ACTIVO_ESTADO" FromRole="ACTIVO" ToRole="ESTADO" />
+    <NavigationProperty Name="UBICACION" Relationship="Self.FK_ACTIVO_UBICACION" FromRole="ACTIVO" ToRole="UBICACION" />
+    <NavigationProperty Name="VALIDACION" Relationship="Self.FK_VALIDACION_ACTIVO" FromRole="ACTIVO" ToRole="VALIDACION" />
+  </EntityType>
+  <EntityType Name="ASIENTO">
+    <Key>
+      <PropertyRef Name="ID_ASIENTO" />
+    </Key>
+    <Property Name="ID_ASIENTO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_CLASE" Type="Int32" />
+    <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="225" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="ASIENTO_LINEA" Relationship="Self.FK_ASIENTO_LINEA" FromRole="ASIENTO" ToRole="ASIENTO_LINEA" />
+    <NavigationProperty Name="CLASE" Relationship="Self.PK_ASIENTO_ACTIVO" FromRole="ASIENTO" ToRole="CLASE" />
+  </EntityType>
+  <EntityType Name="ASIENTO_LINEA">
+    <Key>
+      <PropertyRef Name="ID_ASIENTO_LINEA" />
+    </Key>
+    <Property Name="ID_ASIENTO_LINEA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_ASIENTO" Type="Int32" Nullable="false" />
+    <Property Name="ID_CUENTA_CONTABLE" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DESCRIPCION_LINEA" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DEBITO" Type="Double" Nullable="false" />
+    <Property Name="CREDITO" Type="Double" Nullable="false" />
+    <NavigationProperty Name="ASIENTO" Relationship="Self.FK_ASIENTO_LINEA" FromRole="ASIENTO_LINEA" ToRole="ASIENTO" />
+    <NavigationProperty Name="CUENTA_CONTABLE" Relationship="Self.FK_ASIENTO_CUENTA" FromRole="ASIENTO_LINEA" ToRole="CUENTA_CONTABLE" />
+  </EntityType>
+  <EntityType Name="CATEGORIA_CUENTA">
+    <Key>
+      <PropertyRef Name="ID_CATEGORIA" />
+    </Key>
+    <Property Name="ID_CATEGORIA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DESCRIPCION_CATEGORIA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="CLASE_CUENTA" Relationship="Self.FK_CATEGORIA_CLASECUENTA" FromRole="CATEGORIA_CUENTA" ToRole="CLASE_CUENTA" />
+    <NavigationProperty Name="CUENTA_CONTABLE" Relationship="Self.FK_CUENTA_CATEGORIA" FromRole="CATEGORIA_CUENTA" ToRole="CUENTA_CONTABLE" />
+  </EntityType>
+  <EntityType Name="CLASE">
+    <Key>
+      <PropertyRef Name="ID_CLASE" />
+    </Key>
+    <Property Name="ID_CLASE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DESCRIPCION_CLASE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="VIDA_UTIL" Type="Int32" />
+    <NavigationProperty Name="ACTIVO" Relationship="Self.FK_ACTIVO_CLASE" FromRole="CLASE" ToRole="ACTIVO" />
+    <NavigationProperty Name="ASIENTO" Relationship="Self.PK_ASIENTO_ACTIVO" FromRole="CLASE" ToRole="ASIENTO" />
+    <NavigationProperty Name="CLASE_CUENTA" Relationship="Self.FK_CLASE_CLASECUENTA" FromRole="CLASE" ToRole="CLASE_CUENTA" />
+    <NavigationProperty Name="TIPO_VALIDACION" Relationship="Self.FK_CLASE_VALIDACION" FromRole="CLASE" ToRole="TIPO_VALIDACION" />
+  </EntityType>
+  <EntityType Name="CLASE_CUENTA">
+    <Key>
+      <PropertyRef Name="ID_CLASE_CUENTA" />
+    </Key>
+    <Property Name="ID_CLASE_CUENTA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_CLASE" Type="Int32" Nullable="false" />
+    <Property Name="ID_CUENTA" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ID_CATEGORIA_CUENTA" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CATEGORIA_CUENTA" Relationship="Self.FK_CATEGORIA_CLASECUENTA" FromRole="CLASE_CUENTA" ToRole="CATEGORIA_CUENTA" />
+    <NavigationProperty Name="CLASE" Relationship="Self.FK_CLASE_CLASECUENTA" FromRole="CLASE_CUENTA" ToRole="CLASE" />
+    <NavigationProperty Name="CUENTA_CONTABLE" Relationship="Self.FK_CUENTA_CLASECUENTA" FromRole="CLASE_CUENTA" ToRole="CUENTA_CONTABLE" />
+  </EntityType>
+  <EntityType Name="CUENTA_CONTABLE">
+    <Key>
+      <PropertyRef Name="ID_CUENTA" />
+    </Key>
+    <Property Name="ID_CUENTA" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DESCRIPCION_CUENTA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ID_CATEGORIA" Type="Int32" Nullable="false" />
+    <Property Name="TOTAL_DEBITOS" Type="Double" />
+    <Property Name="TOTAL_CREDITOS" Type="Double" />
+    <Property Name="BALANCE" Type="Double" />
+    <Property Name="NATURALEZA" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="ASIENTO_LINEA" Relationship="Self.FK_ASIENTO_CUENTA" FromRole="CUENTA_CONTABLE" ToRole="ASIENTO_LINEA" />
+    <NavigationProperty Name="CATEGORIA_CUENTA" Relationship="Self.FK_CUENTA_CATEGORIA" FromRole="CUENTA_CONTABLE" ToRole="CATEGORIA_CUENTA" />
+    <NavigationProperty Name="CLASE_CUENTA" Relationship="Self.FK_CUENTA_CLASECUENTA" FromRole="CUENTA_CONTABLE" ToRole="CLASE_CUENTA" />
+  </EntityType>
+  <EntityType Name="EDIFICIO">
+    <Key>
+      <PropertyRef Name="ID_EDIFICIO" />
+    </Key>
+    <Property Name="ID_EDIFICIO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DESCRIPCION_EDIFICIO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="UBICACION" Relationship="Self.FK_EDIFICIO_UBICACION" FromRole="EDIFICIO" ToRole="UBICACION" />
+  </EntityType>
+  <EntityType Name="ESTADO">
+    <Key>
+      <PropertyRef Name="ID_ESTADO" />
+    </Key>
+    <Property Name="ID_ESTADO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DESCRIPCION_ESTADO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="ACTIVO" Relationship="Self.FK_ACTIVO_ESTADO" FromRole="ESTADO" ToRole="ACTIVO" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="TIPO_VALIDACION">
+    <Key>
+      <PropertyRef Name="ID_TIPO_VALIDACION" />
+    </Key>
+    <Property Name="ID_TIPO_VALIDACION" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_CLASE" Type="Int32" Nullable="false" />
+    <Property Name="DESCRIPCION_VALIDACION" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="CLASE" Relationship="Self.FK_CLASE_VALIDACION" FromRole="TIPO_VALIDACION" ToRole="CLASE" />
+    <NavigationProperty Name="VALIDACION" Relationship="Self.FK_VALIDACION_TIPO" FromRole="TIPO_VALIDACION" ToRole="VALIDACION" />
+  </EntityType>
+  <EntityType Name="UBICACION">
+    <Key>
+      <PropertyRef Name="ID_UBICACION" />
+    </Key>
+    <Property Name="ID_UBICACION" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_EDIFICIO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DESCRIPCION_SECCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="ACTIVO" Relationship="Self.FK_ACTIVO_UBICACION" FromRole="UBICACION" ToRole="ACTIVO" />
+    <NavigationProperty Name="EDIFICIO" Relationship="Self.FK_EDIFICIO_UBICACION" FromRole="UBICACION" ToRole="EDIFICIO" />
+  </EntityType>
+  <EntityType Name="USUARIO">
+    <Key>
+      <PropertyRef Name="ID_USUARIO" />
+    </Key>
+    <Property Name="ID_USUARIO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CORREO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CONTRASENNA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ID_ROLE" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ACTIVO" Relationship="Self.FK_ACTIVO_DUENNO" FromRole="USUARIO" ToRole="ACTIVO" />
+    <NavigationProperty Name="USUARIO_ROLE" Relationship="Self.FK_ROLE_USUARIO" FromRole="USUARIO" ToRole="USUARIO_ROLE" />
+    <Property Name="ESTADO" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="USUARIO_ROLE">
+    <Key>
+      <PropertyRef Name="ID_ROLE" />
+    </Key>
+    <Property Name="ID_ROLE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NOMBRE_ROLE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DESCRIPCION_PERMISOS" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="USUARIO" Relationship="Self.FK_ROLE_USUARIO" FromRole="USUARIO_ROLE" ToRole="USUARIO" />
+  </EntityType>
+  <EntityType Name="VALIDACION">
+    <Key>
+      <PropertyRef Name="ID_VALIDACION" />
+    </Key>
+    <Property Name="ID_VALIDACION" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_TIPO_VALIDACION" Type="Int32" Nullable="false" />
+    <Property Name="ID_ACTIVO" Type="Int32" Nullable="false" />
+    <Property Name="VALOR" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="ACTIVO" Relationship="Self.FK_VALIDACION_ACTIVO" FromRole="VALIDACION" ToRole="ACTIVO" />
+    <NavigationProperty Name="TIPO_VALIDACION" Relationship="Self.FK_VALIDACION_TIPO" FromRole="VALIDACION" ToRole="TIPO_VALIDACION" />
+  </EntityType>
+  <EntityType Name="ACCOUNTS_BALANCE_RESUME">
+    <Key>
+      <PropertyRef Name="ID_CUENTA" />
+      <PropertyRef Name="DESCRIPCION_CUENTA" />
+      <PropertyRef Name="NATURALEZA" />
+    </Key>
+    <Property Name="ID_CUENTA" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DESCRIPCION_CUENTA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NATURALEZA" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DESCRIPCION_CATEGORIA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TOTAL_DEBITOS" Type="Double" />
+    <Property Name="TOTAL_CREDITOS" Type="Double" />
+    <Property Name="BALANCE" Type="Double" />
+  </EntityType>
+  <EntityType Name="ACCOUNTS_RESUME">
+    <Key>
+      <PropertyRef Name="ID_CUENTA" />
+      <PropertyRef Name="DESCRIPCION_CUENTA" />
+      <PropertyRef Name="ID_CATEGORIA" />
+    </Key>
+    <Property Name="ID_CUENTA" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DESCRIPCION_CUENTA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ID_CATEGORIA" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AUXILIAR_DEPRECIACION">
+    <Key>
+      <PropertyRef Name="VALOR_ADQUISICION" />
+      <PropertyRef Name="ID_CLASE" />
+    </Key>
+    <Property Name="DESCRIPCION_ACTIVO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="VALOR_ADQUISICION" Type="Double" Nullable="false" />
+    <Property Name="FECHA_ADQUISICION" Type="DateTime" Precision="0" />
+    <Property Name="PERIODOS_DEPRECIADOS" Type="Int32" />
+    <Property Name="DESCRIPCION_CLASE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="VIDA_UTIL" Type="Int32" />
+    <Property Name="ID_CLASE" Type="Int32" Nullable="false" />
+    <Property Name="DEPRECIACION_MENSUAL" Type="Double" />
+    <Property Name="DEPRECIACION_ACUMULADA" Type="Double" />
+  </EntityType>
+  <EntityType Name="CLASSES_LIST">
+    <Key>
+      <PropertyRef Name="ID_CLASE" />
+    </Key>
+    <Property Name="ID_CLASE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DESCRIPCION_CLASE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CUENTA_ACTIVO" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="CUENTA_GASTO" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="CUENTA_DEP_ACUMULADA" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="VIDA_UTIL" Type="Int32" />
+  </EntityType>
+  <EntityType Name="RESUMEN_ACTIVOS">
+    <Key>
+      <PropertyRef Name="ID_ACTIVO" />
+      <PropertyRef Name="VALOR_ADQUISICION" />
+      <PropertyRef Name="ID_EDIFICIO" />
+      <PropertyRef Name="DESCRIPCION_SECCION" />
+      <PropertyRef Name="NOMBRE" />
+      <PropertyRef Name="DESCRIPCION_ESTADO" />
+    </Key>
+    <Property Name="ID_ACTIVO" Type="Int32" Nullable="false" />
+    <Property Name="DESCRIPCION_ACTIVO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="VALOR_ADQUISICION" Type="Double" Nullable="false" />
+    <Property Name="FECHA_ADQUISICION" Type="DateTime" Precision="0" />
+    <Property Name="DESCRIPCION_CLASE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="VIDA_UTIL" Type="Int32" />
+    <Property Name="PERIODOS_DEPRECIADOS" Type="Int32" />
+    <Property Name="ID_EDIFICIO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DESCRIPCION_SECCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DESCRIPCION_ESTADO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RESUMEN_ASIENTO_LINEAS">
+    <Key>
+      <PropertyRef Name="ID_ASIENTO_LINEA" />
+      <PropertyRef Name="ID_CUENTA_CONTABLE" />
+      <PropertyRef Name="DESCRIPCION_LINEA" />
+      <PropertyRef Name="DEBITO" />
+      <PropertyRef Name="CREDITO" />
+      <PropertyRef Name="BALANCE" />
+    </Key>
+    <Property Name="ID_ASIENTO_LINEA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ID_CUENTA_CONTABLE" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DESCRIPCION_LINEA" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DEBITO" Type="Double" Nullable="false" />
+    <Property Name="CREDITO" Type="Double" Nullable="false" />
+    <Property Name="BALANCE" Type="Double" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RESUMEN_ASIENTOS">
+    <Key>
+      <PropertyRef Name="ID_ASIENTO" />
+      <PropertyRef Name="FECHA" />
+      <PropertyRef Name="DESCRIPCION" />
+    </Key>
+    <Property Name="ID_ASIENTO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="225" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DESCRIPCION_CLASE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TOTAL_ASIENTO" Type="Double" />
+  </EntityType>
+  <EntityType Name="VALIDACIONES_RESUMEN">
+    <Key>
+      <PropertyRef Name="ID_TIPO_VALIDACION" />
+      <PropertyRef Name="ID_CLASE" />
+      <PropertyRef Name="DESCRIPCION_VALIDACION" />
+    </Key>
+    <Property Name="ID_TIPO_VALIDACION" Type="Int32" Nullable="false" />
+    <Property Name="ID_CLASE" Type="Int32" Nullable="false" />
+    <Property Name="DESCRIPCION_VALIDACION" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DESCRIPCION_CLASE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_ACTIVO_CLASE">
+    <End Role="CLASE" Type="Self.CLASE" Multiplicity="1" />
+    <End Role="ACTIVO" Type="Self.ACTIVO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CLASE">
+        <PropertyRef Name="ID_CLASE" />
+      </Principal>
+      <Dependent Role="ACTIVO">
+        <PropertyRef Name="ID_CLASE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ACTIVO_DUENNO">
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+    <End Role="ACTIVO" Type="Self.ACTIVO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO">
+        <PropertyRef Name="ID_USUARIO" />
+      </Principal>
+      <Dependent Role="ACTIVO">
+        <PropertyRef Name="ID_DUENNO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ACTIVO_ESTADO">
+    <End Role="ESTADO" Type="Self.ESTADO" Multiplicity="1" />
+    <End Role="ACTIVO" Type="Self.ACTIVO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ESTADO">
+        <PropertyRef Name="ID_ESTADO" />
+      </Principal>
+      <Dependent Role="ACTIVO">
+        <PropertyRef Name="ID_ESTADO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ACTIVO_UBICACION">
+    <End Role="UBICACION" Type="Self.UBICACION" Multiplicity="1" />
+    <End Role="ACTIVO" Type="Self.ACTIVO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UBICACION">
+        <PropertyRef Name="ID_UBICACION" />
+      </Principal>
+      <Dependent Role="ACTIVO">
+        <PropertyRef Name="ID_UBICACION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VALIDACION_ACTIVO">
+    <End Role="ACTIVO" Type="Self.ACTIVO" Multiplicity="1" />
+    <End Role="VALIDACION" Type="Self.VALIDACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ACTIVO">
+        <PropertyRef Name="ID_ACTIVO" />
+      </Principal>
+      <Dependent Role="VALIDACION">
+        <PropertyRef Name="ID_ACTIVO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ASIENTO_LINEA">
+    <End Role="ASIENTO" Type="Self.ASIENTO" Multiplicity="1" />
+    <End Role="ASIENTO_LINEA" Type="Self.ASIENTO_LINEA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ASIENTO">
+        <PropertyRef Name="ID_ASIENTO" />
+      </Principal>
+      <Dependent Role="ASIENTO_LINEA">
+        <PropertyRef Name="ID_ASIENTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PK_ASIENTO_ACTIVO">
+    <End Role="CLASE" Type="Self.CLASE" Multiplicity="0..1" />
+    <End Role="ASIENTO" Type="Self.ASIENTO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CLASE">
+        <PropertyRef Name="ID_CLASE" />
+      </Principal>
+      <Dependent Role="ASIENTO">
+        <PropertyRef Name="ID_CLASE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ASIENTO_CUENTA">
+    <End Role="CUENTA_CONTABLE" Type="Self.CUENTA_CONTABLE" Multiplicity="1" />
+    <End Role="ASIENTO_LINEA" Type="Self.ASIENTO_LINEA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CUENTA_CONTABLE">
+        <PropertyRef Name="ID_CUENTA" />
+      </Principal>
+      <Dependent Role="ASIENTO_LINEA">
+        <PropertyRef Name="ID_CUENTA_CONTABLE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CATEGORIA_CLASECUENTA">
+    <End Role="CATEGORIA_CUENTA" Type="Self.CATEGORIA_CUENTA" Multiplicity="1" />
+    <End Role="CLASE_CUENTA" Type="Self.CLASE_CUENTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CATEGORIA_CUENTA">
+        <PropertyRef Name="ID_CATEGORIA" />
+      </Principal>
+      <Dependent Role="CLASE_CUENTA">
+        <PropertyRef Name="ID_CATEGORIA_CUENTA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CUENTA_CATEGORIA">
+    <End Role="CATEGORIA_CUENTA" Type="Self.CATEGORIA_CUENTA" Multiplicity="1" />
+    <End Role="CUENTA_CONTABLE" Type="Self.CUENTA_CONTABLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CATEGORIA_CUENTA">
+        <PropertyRef Name="ID_CATEGORIA" />
+      </Principal>
+      <Dependent Role="CUENTA_CONTABLE">
+        <PropertyRef Name="ID_CATEGORIA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CLASE_CLASECUENTA">
+    <End Role="CLASE" Type="Self.CLASE" Multiplicity="1" />
+    <End Role="CLASE_CUENTA" Type="Self.CLASE_CUENTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CLASE">
+        <PropertyRef Name="ID_CLASE" />
+      </Principal>
+      <Dependent Role="CLASE_CUENTA">
+        <PropertyRef Name="ID_CLASE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CLASE_VALIDACION">
+    <End Role="CLASE" Type="Self.CLASE" Multiplicity="1" />
+    <End Role="TIPO_VALIDACION" Type="Self.TIPO_VALIDACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CLASE">
+        <PropertyRef Name="ID_CLASE" />
+      </Principal>
+      <Dependent Role="TIPO_VALIDACION">
+        <PropertyRef Name="ID_CLASE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CUENTA_CLASECUENTA">
+    <End Role="CUENTA_CONTABLE" Type="Self.CUENTA_CONTABLE" Multiplicity="1" />
+    <End Role="CLASE_CUENTA" Type="Self.CLASE_CUENTA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CUENTA_CONTABLE">
+        <PropertyRef Name="ID_CUENTA" />
+      </Principal>
+      <Dependent Role="CLASE_CUENTA">
+        <PropertyRef Name="ID_CUENTA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EDIFICIO_UBICACION">
+    <End Role="EDIFICIO" Type="Self.EDIFICIO" Multiplicity="1" />
+    <End Role="UBICACION" Type="Self.UBICACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EDIFICIO">
+        <PropertyRef Name="ID_EDIFICIO" />
+      </Principal>
+      <Dependent Role="UBICACION">
+        <PropertyRef Name="ID_EDIFICIO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VALIDACION_TIPO">
+    <End Role="TIPO_VALIDACION" Type="Self.TIPO_VALIDACION" Multiplicity="1" />
+    <End Role="VALIDACION" Type="Self.VALIDACION" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TIPO_VALIDACION">
+        <PropertyRef Name="ID_TIPO_VALIDACION" />
+      </Principal>
+      <Dependent Role="VALIDACION">
+        <PropertyRef Name="ID_TIPO_VALIDACION" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ROLE_USUARIO">
+    <End Role="USUARIO_ROLE" Type="Self.USUARIO_ROLE" Multiplicity="1" />
+    <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USUARIO_ROLE">
+        <PropertyRef Name="ID_ROLE" />
+      </Principal>
+      <Dependent Role="USUARIO">
+        <PropertyRef Name="ID_ROLE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ASSET_MANAGEMENTEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ACTIVO" EntityType="Self.ACTIVO" />
+    <EntitySet Name="ASIENTO" EntityType="Self.ASIENTO" />
+    <EntitySet Name="ASIENTO_LINEA" EntityType="Self.ASIENTO_LINEA" />
+    <EntitySet Name="CATEGORIA_CUENTA" EntityType="Self.CATEGORIA_CUENTA" />
+    <EntitySet Name="CLASE" EntityType="Self.CLASE" />
+    <EntitySet Name="CLASE_CUENTA" EntityType="Self.CLASE_CUENTA" />
+    <EntitySet Name="CUENTA_CONTABLE" EntityType="Self.CUENTA_CONTABLE" />
+    <EntitySet Name="EDIFICIO" EntityType="Self.EDIFICIO" />
+    <EntitySet Name="ESTADO" EntityType="Self.ESTADO" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="TIPO_VALIDACION" EntityType="Self.TIPO_VALIDACION" />
+    <EntitySet Name="UBICACION" EntityType="Self.UBICACION" />
+    <EntitySet Name="USUARIO" EntityType="Self.USUARIO" />
+    <EntitySet Name="USUARIO_ROLE" EntityType="Self.USUARIO_ROLE" />
+    <EntitySet Name="VALIDACION" EntityType="Self.VALIDACION" />
+    <EntitySet Name="ACCOUNTS_BALANCE_RESUME" EntityType="Self.ACCOUNTS_BALANCE_RESUME" />
+    <EntitySet Name="ACCOUNTS_RESUME" EntityType="Self.ACCOUNTS_RESUME" />
+    <EntitySet Name="AUXILIAR_DEPRECIACION" EntityType="Self.AUXILIAR_DEPRECIACION" />
+    <EntitySet Name="CLASSES_LIST" EntityType="Self.CLASSES_LIST" />
+    <EntitySet Name="RESUMEN_ACTIVOS" EntityType="Self.RESUMEN_ACTIVOS" />
+    <EntitySet Name="RESUMEN_ASIENTO_LINEAS" EntityType="Self.RESUMEN_ASIENTO_LINEAS" />
+    <EntitySet Name="RESUMEN_ASIENTOS" EntityType="Self.RESUMEN_ASIENTOS" />
+    <EntitySet Name="VALIDACIONES_RESUMEN" EntityType="Self.VALIDACIONES_RESUMEN" />
+    <AssociationSet Name="FK_ACTIVO_CLASE" Association="Self.FK_ACTIVO_CLASE">
+      <End Role="CLASE" EntitySet="CLASE" />
+      <End Role="ACTIVO" EntitySet="ACTIVO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ACTIVO_DUENNO" Association="Self.FK_ACTIVO_DUENNO">
+      <End Role="USUARIO" EntitySet="USUARIO" />
+      <End Role="ACTIVO" EntitySet="ACTIVO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ACTIVO_ESTADO" Association="Self.FK_ACTIVO_ESTADO">
+      <End Role="ESTADO" EntitySet="ESTADO" />
+      <End Role="ACTIVO" EntitySet="ACTIVO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ACTIVO_UBICACION" Association="Self.FK_ACTIVO_UBICACION">
+      <End Role="UBICACION" EntitySet="UBICACION" />
+      <End Role="ACTIVO" EntitySet="ACTIVO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VALIDACION_ACTIVO" Association="Self.FK_VALIDACION_ACTIVO">
+      <End Role="ACTIVO" EntitySet="ACTIVO" />
+      <End Role="VALIDACION" EntitySet="VALIDACION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ASIENTO_LINEA" Association="Self.FK_ASIENTO_LINEA">
+      <End Role="ASIENTO" EntitySet="ASIENTO" />
+      <End Role="ASIENTO_LINEA" EntitySet="ASIENTO_LINEA" />
+    </AssociationSet>
+    <AssociationSet Name="PK_ASIENTO_ACTIVO" Association="Self.PK_ASIENTO_ACTIVO">
+      <End Role="CLASE" EntitySet="CLASE" />
+      <End Role="ASIENTO" EntitySet="ASIENTO" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ASIENTO_CUENTA" Association="Self.FK_ASIENTO_CUENTA">
+      <End Role="CUENTA_CONTABLE" EntitySet="CUENTA_CONTABLE" />
+      <End Role="ASIENTO_LINEA" EntitySet="ASIENTO_LINEA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CATEGORIA_CLASECUENTA" Association="Self.FK_CATEGORIA_CLASECUENTA">
+      <End Role="CATEGORIA_CUENTA" EntitySet="CATEGORIA_CUENTA" />
+      <End Role="CLASE_CUENTA" EntitySet="CLASE_CUENTA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CUENTA_CATEGORIA" Association="Self.FK_CUENTA_CATEGORIA">
+      <End Role="CATEGORIA_CUENTA" EntitySet="CATEGORIA_CUENTA" />
+      <End Role="CUENTA_CONTABLE" EntitySet="CUENTA_CONTABLE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CLASE_CLASECUENTA" Association="Self.FK_CLASE_CLASECUENTA">
+      <End Role="CLASE" EntitySet="CLASE" />
+      <End Role="CLASE_CUENTA" EntitySet="CLASE_CUENTA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CLASE_VALIDACION" Association="Self.FK_CLASE_VALIDACION">
+      <End Role="CLASE" EntitySet="CLASE" />
+      <End Role="TIPO_VALIDACION" EntitySet="TIPO_VALIDACION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CUENTA_CLASECUENTA" Association="Self.FK_CUENTA_CLASECUENTA">
+      <End Role="CUENTA_CONTABLE" EntitySet="CUENTA_CONTABLE" />
+      <End Role="CLASE_CUENTA" EntitySet="CLASE_CUENTA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EDIFICIO_UBICACION" Association="Self.FK_EDIFICIO_UBICACION">
+      <End Role="EDIFICIO" EntitySet="EDIFICIO" />
+      <End Role="UBICACION" EntitySet="UBICACION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VALIDACION_TIPO" Association="Self.FK_VALIDACION_TIPO">
+      <End Role="TIPO_VALIDACION" EntitySet="TIPO_VALIDACION" />
+      <End Role="VALIDACION" EntitySet="VALIDACION" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ROLE_USUARIO" Association="Self.FK_ROLE_USUARIO">
+      <End Role="USUARIO_ROLE" EntitySet="USUARIO_ROLE" />
+      <End Role="USUARIO" EntitySet="USUARIO" />
+    </AssociationSet>
+    <FunctionImport Name="ACTUALIZAR_INFORMACION_VALIDACION">
+      <Parameter Name="IN_ID_ASIENTO" Mode="In" Type="Int32" />
+      <Parameter Name="IN_ID_TIPO_VALIDACION" Mode="In" Type="Int32" />
+      <Parameter Name="IN_VALOR_VALIDACION" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="CORRER_DEPRECIACION" ReturnType="Collection(ASSET_MANAGEMENTModel.CORRER_DEPRECIACION_Result)">
+      <Parameter Name="IN_ID_CLASE" Mode="In" Type="Int32" />
+      <Parameter Name="IN_JE_DESCRIPCION" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="ESTATUS_ACTIVOS" ReturnType="Collection(ASSET_MANAGEMENTModel.ESTATUS_ACTIVOS_Result)">
+      <Parameter Name="IN_ID_USUARIO" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="RESUMEN_ASIENTO_LINEAS_BODY" ReturnType="Collection(ASSET_MANAGEMENTModel.RESUMEN_ASIENTO_LINEAS_BODY_Result)">
+      <Parameter Name="IN_ASIENTO_ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="VALIDAR_USUARIO" ReturnType="Collection(ASSET_MANAGEMENTModel.VALIDAR_USUARIO_Result)">
+      <Parameter Name="IN_EMAIL" Mode="In" Type="String" />
+      <Parameter Name="IN_CONTRASENNA" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="RESUMEN_USUARIOS" EntityType="ASSET_MANAGEMENTModel.RESUMEN_USUARIOS" />
+    <FunctionImport Name="ACTIVAR_USUARIO">
+      <Parameter Name="ID_USUARIO" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="DESACTIVAR_USUARIO">
+      <Parameter Name="ID_USUARIO" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="CONCILIACION_BALANCE_CLASE" EntityType="ASSET_MANAGEMENTModel.CONCILIACION_BALANCE_CLASE" />
+    <FunctionImport Name="CREAR_CLASE">
+      <Parameter Name="IN_CLASS_DESCRIPTION" Mode="In" Type="String" />
+      <Parameter Name="IN_ASSET_ACCOUNT" Mode="In" Type="String" />
+      <Parameter Name="IN_DEP_ACUM_ACCOUNT" Mode="In" Type="String" />
+      <Parameter Name="IN_EXPENSE_ACCOUNT" Mode="In" Type="String" />
+      <Parameter Name="IN_USEFULL_LIFE" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="CORRER_DEPRECIACION_Result">
+    <Property Type="String" Name="DESCRIPCION_ACTIVO" Nullable="true" MaxLength="50" />
+    <Property Type="Double" Name="VALOR_ADQUISICION" Nullable="false" />
+    <Property Type="DateTime" Name="FECHA_ADQUISICION" Nullable="true" />
+    <Property Type="Int32" Name="PERIODOS_DEPRECIADOS" Nullable="true" />
+    <Property Type="String" Name="DESCRIPCION_CLASE" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="VIDA_UTIL" Nullable="true" />
+    <Property Type="Int32" Name="ID_CLASE" Nullable="false" />
+    <Property Type="Double" Name="DEPRECIACION_MENSUAL" Nullable="true" />
+    <Property Type="Double" Name="DEPRECIACION_ACUMULADA" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="ESTATUS_ACTIVOS_Result">
+    <Property Type="Int32" Name="TOTAL_ACTIVOS" Nullable="true" />
+    <Property Type="Double" Name="TOTAL_INVERSION" Nullable="true" />
+    <Property Type="Int32" Name="PORCENTAJE_CUMPLIMIENTO" Nullable="true" />
+    <Property Type="Int32" Name="TOTAL_ACTIVOS_USUARIO" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="RESUMEN_ASIENTO_LINEAS_BODY_Result">
+    <Property Type="Int32" Name="ID_ASIENTO_LINEA" Nullable="false" />
+    <Property Type="String" Name="ID_CUENTA_CONTABLE" Nullable="false" MaxLength="15" />
+    <Property Type="String" Name="DESCRIPCION_LINEA" Nullable="false" MaxLength="255" />
+    <Property Type="Double" Name="DEBITO" Nullable="false" />
+    <Property Type="Double" Name="CREDITO" Nullable="false" />
+    <Property Type="Double" Name="BALANCE" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="VALIDAR_USUARIO_Result">
+    <Property Type="String" Name="NOMBRE" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="CORREO" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="ID_ROLE" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="RESUMEN_USUARIOS">
+    <Key>
+      <PropertyRef Name="NOMBRE" />
+      <PropertyRef Name="CORREO" />
+      <PropertyRef Name="CONTRASENNA" />
+      <PropertyRef Name="ID_ROLE" />
+      <PropertyRef Name="ESTADO" />
+      <PropertyRef Name="ID_USUARIO" />
+    </Key>
+    <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CORREO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CONTRASENNA" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ID_ROLE" Type="Int32" Nullable="false" />
+    <Property Name="NOMBRE_ROLE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ESTADO" Type="Int32" Nullable="false" />
+    <Property Name="ID_USUARIO" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CONCILIACION_BALANCE_CLASE">
+    <Key>
+      <PropertyRef Name="ID_CLASE" />
+      <PropertyRef Name="ID_CUENTA" />
+    </Key>
+    <Property Name="ID_CLASE" Type="Int32" Nullable="false" />
+    <Property Name="ID_CUENTA" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="CATEGORIA_CUENTA" Type="String" MaxLength="59" FixedLength="false" Unicode="false" />
+    <Property Name="DESCRIPCION_CLASE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="BALANCE" Type="Double" />
+    <Property Name="VALOR_AUXILIAR" Type="Double" />
+    <Property Name="DIFERENCIA" Type="Double" />
+  </EntityType>
+</Schema>

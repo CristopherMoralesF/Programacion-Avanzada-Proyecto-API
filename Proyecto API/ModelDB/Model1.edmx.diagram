@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="626771e35c3643d196023ca1dc5ecf0a" Name="Diagram1">
+        <EntityTypeShape EntityType="ASSET_MANAGEMENTModel.ACTIVO" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASSET_MANAGEMENTModel.ASIENTO" Width="1.5" PointX="3" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASSET_MANAGEMENTModel.ASIENTO_LINEA" Width="1.5" PointX="5.25" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASSET_MANAGEMENTModel.CATEGORIA_CUENTA" Width="1.5" PointX="3.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASSET_MANAGEMENTModel.CLASE" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASSET_MANAGEMENTModel.CLASE_CUENTA" Width="1.5" PointX="6" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASSET_MANAGEMENTModel.CUENTA_CONTABLE" Width="1.5" PointX="3.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASSET_MANAGEMENTModel.EDIFICIO" Width="1.5" PointX="1.5" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASSET_MANAGEMENTModel.ESTADO" Width="1.5" PointX="0.625" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASSET_MANAGEMENTModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASSET_MANAGEMENTModel.TIPO_VALIDACION" Width="1.5" PointX="3" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASSET_MANAGEMENTModel.UBICACION" Width="1.5" PointX="0.75" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASSET_MANAGEMENTModel.USUARIO" Width="1.5" PointX="0.75" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASSET_MANAGEMENTModel.USUARIO_ROLE" Width="1.5" PointX="1.5" PointY="21.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASSET_MANAGEMENTModel.VALIDACION" Width="1.5" PointX="5.25" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASSET_MANAGEMENTModel.ACCOUNTS_BALANCE_RESUME" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASSET_MANAGEMENTModel.ACCOUNTS_RESUME" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASSET_MANAGEMENTModel.AUXILIAR_DEPRECIACION" Width="1.5" PointX="8.625" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASSET_MANAGEMENTModel.CLASSES_LIST" Width="1.5" PointX="8.625" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASSET_MANAGEMENTModel.RESUMEN_ACTIVOS" Width="1.5" PointX="12.625" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASSET_MANAGEMENTModel.RESUMEN_ASIENTO_LINEAS" Width="1.5" PointX="12.5" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASSET_MANAGEMENTModel.RESUMEN_ASIENTOS" Width="1.5" PointX="12.25" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASSET_MANAGEMENTModel.VALIDACIONES_RESUMEN" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="ASSET_MANAGEMENTModel.FK_ACTIVO_CLASE" ManuallyRouted="false" />
+        <AssociationConnector Association="ASSET_MANAGEMENTModel.FK_ACTIVO_DUENNO" ManuallyRouted="false" />
+        <AssociationConnector Association="ASSET_MANAGEMENTModel.FK_ACTIVO_ESTADO" ManuallyRouted="false" />
+        <AssociationConnector Association="ASSET_MANAGEMENTModel.FK_ACTIVO_UBICACION" ManuallyRouted="false" />
+        <AssociationConnector Association="ASSET_MANAGEMENTModel.FK_VALIDACION_ACTIVO" ManuallyRouted="false" />
+        <AssociationConnector Association="ASSET_MANAGEMENTModel.FK_ASIENTO_LINEA" ManuallyRouted="false" />
+        <AssociationConnector Association="ASSET_MANAGEMENTModel.PK_ASIENTO_ACTIVO" ManuallyRouted="false" />
+        <AssociationConnector Association="ASSET_MANAGEMENTModel.FK_ASIENTO_CUENTA" ManuallyRouted="false" />
+        <AssociationConnector Association="ASSET_MANAGEMENTModel.FK_CATEGORIA_CLASECUENTA" ManuallyRouted="false" />
+        <AssociationConnector Association="ASSET_MANAGEMENTModel.FK_CUENTA_CATEGORIA" ManuallyRouted="false" />
+        <AssociationConnector Association="ASSET_MANAGEMENTModel.FK_CLASE_CLASECUENTA" ManuallyRouted="false" />
+        <AssociationConnector Association="ASSET_MANAGEMENTModel.FK_CLASE_VALIDACION" ManuallyRouted="false" />
+        <AssociationConnector Association="ASSET_MANAGEMENTModel.FK_CUENTA_CLASECUENTA" ManuallyRouted="false" />
+        <AssociationConnector Association="ASSET_MANAGEMENTModel.FK_EDIFICIO_UBICACION" ManuallyRouted="false" />
+        <AssociationConnector Association="ASSET_MANAGEMENTModel.FK_VALIDACION_TIPO" ManuallyRouted="false" />
+        <AssociationConnector Association="ASSET_MANAGEMENTModel.FK_ROLE_USUARIO" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ASSET_MANAGEMENTModel.RESUMEN_USUARIOS" Width="1.5" PointX="7.375" PointY="13.75" />
+        <EntityTypeShape EntityType="ASSET_MANAGEMENTModel.CONCILIACION_BALANCE_CLASE" Width="1.5" PointX="10.625" PointY="14" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

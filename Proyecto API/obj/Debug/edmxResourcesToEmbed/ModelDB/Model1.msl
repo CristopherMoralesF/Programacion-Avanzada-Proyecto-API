@@ -1,0 +1,333 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ASSET_MANAGEMENTModelStoreContainer" CdmEntityContainer="ASSET_MANAGEMENTEntities">
+    <EntitySetMapping Name="ACTIVO">
+      <EntityTypeMapping TypeName="ASSET_MANAGEMENTModel.ACTIVO">
+        <MappingFragment StoreEntitySet="ACTIVO">
+          <ScalarProperty Name="ID_ACTIVO" ColumnName="ID_ACTIVO" />
+          <ScalarProperty Name="ID_CLASE" ColumnName="ID_CLASE" />
+          <ScalarProperty Name="ID_UBICACION" ColumnName="ID_UBICACION" />
+          <ScalarProperty Name="ID_DUENNO" ColumnName="ID_DUENNO" />
+          <ScalarProperty Name="ID_ESTADO" ColumnName="ID_ESTADO" />
+          <ScalarProperty Name="DESCRIPCION_ACTIVO" ColumnName="DESCRIPCION_ACTIVO" />
+          <ScalarProperty Name="VALOR_ADQUISICION" ColumnName="VALOR_ADQUISICION" />
+          <ScalarProperty Name="FECHA_ADQUISICION" ColumnName="FECHA_ADQUISICION" />
+          <ScalarProperty Name="PERIODOS_DEPRECIADOS" ColumnName="PERIODOS_DEPRECIADOS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ASIENTO">
+      <EntityTypeMapping TypeName="ASSET_MANAGEMENTModel.ASIENTO">
+        <MappingFragment StoreEntitySet="ASIENTO">
+          <ScalarProperty Name="ID_ASIENTO" ColumnName="ID_ASIENTO" />
+          <ScalarProperty Name="ID_CLASE" ColumnName="ID_CLASE" />
+          <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ASIENTO_LINEA">
+      <EntityTypeMapping TypeName="ASSET_MANAGEMENTModel.ASIENTO_LINEA">
+        <MappingFragment StoreEntitySet="ASIENTO_LINEA">
+          <ScalarProperty Name="ID_ASIENTO_LINEA" ColumnName="ID_ASIENTO_LINEA" />
+          <ScalarProperty Name="ID_ASIENTO" ColumnName="ID_ASIENTO" />
+          <ScalarProperty Name="ID_CUENTA_CONTABLE" ColumnName="ID_CUENTA_CONTABLE" />
+          <ScalarProperty Name="DESCRIPCION_LINEA" ColumnName="DESCRIPCION_LINEA" />
+          <ScalarProperty Name="DEBITO" ColumnName="DEBITO" />
+          <ScalarProperty Name="CREDITO" ColumnName="CREDITO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CATEGORIA_CUENTA">
+      <EntityTypeMapping TypeName="ASSET_MANAGEMENTModel.CATEGORIA_CUENTA">
+        <MappingFragment StoreEntitySet="CATEGORIA_CUENTA">
+          <ScalarProperty Name="ID_CATEGORIA" ColumnName="ID_CATEGORIA" />
+          <ScalarProperty Name="DESCRIPCION_CATEGORIA" ColumnName="DESCRIPCION_CATEGORIA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CLASE">
+      <EntityTypeMapping TypeName="ASSET_MANAGEMENTModel.CLASE">
+        <MappingFragment StoreEntitySet="CLASE">
+          <ScalarProperty Name="ID_CLASE" ColumnName="ID_CLASE" />
+          <ScalarProperty Name="DESCRIPCION_CLASE" ColumnName="DESCRIPCION_CLASE" />
+          <ScalarProperty Name="VIDA_UTIL" ColumnName="VIDA_UTIL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CLASE_CUENTA">
+      <EntityTypeMapping TypeName="ASSET_MANAGEMENTModel.CLASE_CUENTA">
+        <MappingFragment StoreEntitySet="CLASE_CUENTA">
+          <ScalarProperty Name="ID_CLASE_CUENTA" ColumnName="ID_CLASE_CUENTA" />
+          <ScalarProperty Name="ID_CLASE" ColumnName="ID_CLASE" />
+          <ScalarProperty Name="ID_CUENTA" ColumnName="ID_CUENTA" />
+          <ScalarProperty Name="ID_CATEGORIA_CUENTA" ColumnName="ID_CATEGORIA_CUENTA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CUENTA_CONTABLE">
+      <EntityTypeMapping TypeName="ASSET_MANAGEMENTModel.CUENTA_CONTABLE">
+        <MappingFragment StoreEntitySet="CUENTA_CONTABLE">
+          <ScalarProperty Name="ID_CUENTA" ColumnName="ID_CUENTA" />
+          <ScalarProperty Name="DESCRIPCION_CUENTA" ColumnName="DESCRIPCION_CUENTA" />
+          <ScalarProperty Name="ID_CATEGORIA" ColumnName="ID_CATEGORIA" />
+          <ScalarProperty Name="TOTAL_DEBITOS" ColumnName="TOTAL_DEBITOS" />
+          <ScalarProperty Name="TOTAL_CREDITOS" ColumnName="TOTAL_CREDITOS" />
+          <ScalarProperty Name="BALANCE" ColumnName="BALANCE" />
+          <ScalarProperty Name="NATURALEZA" ColumnName="NATURALEZA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EDIFICIO">
+      <EntityTypeMapping TypeName="ASSET_MANAGEMENTModel.EDIFICIO">
+        <MappingFragment StoreEntitySet="EDIFICIO">
+          <ScalarProperty Name="ID_EDIFICIO" ColumnName="ID_EDIFICIO" />
+          <ScalarProperty Name="DESCRIPCION_EDIFICIO" ColumnName="DESCRIPCION_EDIFICIO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ESTADO">
+      <EntityTypeMapping TypeName="ASSET_MANAGEMENTModel.ESTADO">
+        <MappingFragment StoreEntitySet="ESTADO">
+          <ScalarProperty Name="ID_ESTADO" ColumnName="ID_ESTADO" />
+          <ScalarProperty Name="DESCRIPCION_ESTADO" ColumnName="DESCRIPCION_ESTADO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="ASSET_MANAGEMENTModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TIPO_VALIDACION">
+      <EntityTypeMapping TypeName="ASSET_MANAGEMENTModel.TIPO_VALIDACION">
+        <MappingFragment StoreEntitySet="TIPO_VALIDACION">
+          <ScalarProperty Name="ID_TIPO_VALIDACION" ColumnName="ID_TIPO_VALIDACION" />
+          <ScalarProperty Name="ID_CLASE" ColumnName="ID_CLASE" />
+          <ScalarProperty Name="DESCRIPCION_VALIDACION" ColumnName="DESCRIPCION_VALIDACION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UBICACION">
+      <EntityTypeMapping TypeName="ASSET_MANAGEMENTModel.UBICACION">
+        <MappingFragment StoreEntitySet="UBICACION">
+          <ScalarProperty Name="ID_UBICACION" ColumnName="ID_UBICACION" />
+          <ScalarProperty Name="ID_EDIFICIO" ColumnName="ID_EDIFICIO" />
+          <ScalarProperty Name="DESCRIPCION_SECCION" ColumnName="DESCRIPCION_SECCION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="USUARIO">
+      <EntityTypeMapping TypeName="ASSET_MANAGEMENTModel.USUARIO">
+        <MappingFragment StoreEntitySet="USUARIO">
+          <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+          <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="CORREO" ColumnName="CORREO" />
+          <ScalarProperty Name="CONTRASENNA" ColumnName="CONTRASENNA" />
+          <ScalarProperty Name="ID_ROLE" ColumnName="ID_ROLE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="USUARIO_ROLE">
+      <EntityTypeMapping TypeName="ASSET_MANAGEMENTModel.USUARIO_ROLE">
+        <MappingFragment StoreEntitySet="USUARIO_ROLE">
+          <ScalarProperty Name="ID_ROLE" ColumnName="ID_ROLE" />
+          <ScalarProperty Name="NOMBRE_ROLE" ColumnName="NOMBRE_ROLE" />
+          <ScalarProperty Name="DESCRIPCION_PERMISOS" ColumnName="DESCRIPCION_PERMISOS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VALIDACION">
+      <EntityTypeMapping TypeName="ASSET_MANAGEMENTModel.VALIDACION">
+        <MappingFragment StoreEntitySet="VALIDACION">
+          <ScalarProperty Name="ID_VALIDACION" ColumnName="ID_VALIDACION" />
+          <ScalarProperty Name="ID_TIPO_VALIDACION" ColumnName="ID_TIPO_VALIDACION" />
+          <ScalarProperty Name="ID_ACTIVO" ColumnName="ID_ACTIVO" />
+          <ScalarProperty Name="VALOR" ColumnName="VALOR" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ACCOUNTS_BALANCE_RESUME">
+      <EntityTypeMapping TypeName="ASSET_MANAGEMENTModel.ACCOUNTS_BALANCE_RESUME">
+        <MappingFragment StoreEntitySet="ACCOUNTS_BALANCE_RESUME">
+          <ScalarProperty Name="ID_CUENTA" ColumnName="ID_CUENTA" />
+          <ScalarProperty Name="DESCRIPCION_CUENTA" ColumnName="DESCRIPCION_CUENTA" />
+          <ScalarProperty Name="NATURALEZA" ColumnName="NATURALEZA" />
+          <ScalarProperty Name="DESCRIPCION_CATEGORIA" ColumnName="DESCRIPCION_CATEGORIA" />
+          <ScalarProperty Name="TOTAL_DEBITOS" ColumnName="TOTAL_DEBITOS" />
+          <ScalarProperty Name="TOTAL_CREDITOS" ColumnName="TOTAL_CREDITOS" />
+          <ScalarProperty Name="BALANCE" ColumnName="BALANCE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ACCOUNTS_RESUME">
+      <EntityTypeMapping TypeName="ASSET_MANAGEMENTModel.ACCOUNTS_RESUME">
+        <MappingFragment StoreEntitySet="ACCOUNTS_RESUME">
+          <ScalarProperty Name="ID_CUENTA" ColumnName="ID_CUENTA" />
+          <ScalarProperty Name="DESCRIPCION_CUENTA" ColumnName="DESCRIPCION_CUENTA" />
+          <ScalarProperty Name="ID_CATEGORIA" ColumnName="ID_CATEGORIA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AUXILIAR_DEPRECIACION">
+      <EntityTypeMapping TypeName="ASSET_MANAGEMENTModel.AUXILIAR_DEPRECIACION">
+        <MappingFragment StoreEntitySet="AUXILIAR_DEPRECIACION">
+          <ScalarProperty Name="DESCRIPCION_ACTIVO" ColumnName="DESCRIPCION_ACTIVO" />
+          <ScalarProperty Name="VALOR_ADQUISICION" ColumnName="VALOR_ADQUISICION" />
+          <ScalarProperty Name="FECHA_ADQUISICION" ColumnName="FECHA_ADQUISICION" />
+          <ScalarProperty Name="PERIODOS_DEPRECIADOS" ColumnName="PERIODOS_DEPRECIADOS" />
+          <ScalarProperty Name="DESCRIPCION_CLASE" ColumnName="DESCRIPCION_CLASE" />
+          <ScalarProperty Name="VIDA_UTIL" ColumnName="VIDA_UTIL" />
+          <ScalarProperty Name="ID_CLASE" ColumnName="ID_CLASE" />
+          <ScalarProperty Name="DEPRECIACION_MENSUAL" ColumnName="DEPRECIACION_MENSUAL" />
+          <ScalarProperty Name="DEPRECIACION_ACUMULADA" ColumnName="DEPRECIACION_ACUMULADA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CLASSES_LIST">
+      <EntityTypeMapping TypeName="ASSET_MANAGEMENTModel.CLASSES_LIST">
+        <MappingFragment StoreEntitySet="CLASSES_LIST">
+          <ScalarProperty Name="ID_CLASE" ColumnName="ID_CLASE" />
+          <ScalarProperty Name="DESCRIPCION_CLASE" ColumnName="DESCRIPCION_CLASE" />
+          <ScalarProperty Name="CUENTA_ACTIVO" ColumnName="CUENTA_ACTIVO" />
+          <ScalarProperty Name="CUENTA_GASTO" ColumnName="CUENTA_GASTO" />
+          <ScalarProperty Name="CUENTA_DEP_ACUMULADA" ColumnName="CUENTA_DEP_ACUMULADA" />
+          <ScalarProperty Name="VIDA_UTIL" ColumnName="VIDA_UTIL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RESUMEN_ACTIVOS">
+      <EntityTypeMapping TypeName="ASSET_MANAGEMENTModel.RESUMEN_ACTIVOS">
+        <MappingFragment StoreEntitySet="RESUMEN_ACTIVOS">
+          <ScalarProperty Name="ID_ACTIVO" ColumnName="ID_ACTIVO" />
+          <ScalarProperty Name="DESCRIPCION_ACTIVO" ColumnName="DESCRIPCION_ACTIVO" />
+          <ScalarProperty Name="VALOR_ADQUISICION" ColumnName="VALOR_ADQUISICION" />
+          <ScalarProperty Name="FECHA_ADQUISICION" ColumnName="FECHA_ADQUISICION" />
+          <ScalarProperty Name="DESCRIPCION_CLASE" ColumnName="DESCRIPCION_CLASE" />
+          <ScalarProperty Name="VIDA_UTIL" ColumnName="VIDA_UTIL" />
+          <ScalarProperty Name="PERIODOS_DEPRECIADOS" ColumnName="PERIODOS_DEPRECIADOS" />
+          <ScalarProperty Name="ID_EDIFICIO" ColumnName="ID_EDIFICIO" />
+          <ScalarProperty Name="DESCRIPCION_SECCION" ColumnName="DESCRIPCION_SECCION" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="DESCRIPCION_ESTADO" ColumnName="DESCRIPCION_ESTADO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RESUMEN_ASIENTO_LINEAS">
+      <EntityTypeMapping TypeName="ASSET_MANAGEMENTModel.RESUMEN_ASIENTO_LINEAS">
+        <MappingFragment StoreEntitySet="RESUMEN_ASIENTO_LINEAS">
+          <ScalarProperty Name="ID_ASIENTO_LINEA" ColumnName="ID_ASIENTO_LINEA" />
+          <ScalarProperty Name="ID_CUENTA_CONTABLE" ColumnName="ID_CUENTA_CONTABLE" />
+          <ScalarProperty Name="DESCRIPCION_LINEA" ColumnName="DESCRIPCION_LINEA" />
+          <ScalarProperty Name="DEBITO" ColumnName="DEBITO" />
+          <ScalarProperty Name="CREDITO" ColumnName="CREDITO" />
+          <ScalarProperty Name="BALANCE" ColumnName="BALANCE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RESUMEN_ASIENTOS">
+      <EntityTypeMapping TypeName="ASSET_MANAGEMENTModel.RESUMEN_ASIENTOS">
+        <MappingFragment StoreEntitySet="RESUMEN_ASIENTOS">
+          <ScalarProperty Name="ID_ASIENTO" ColumnName="ID_ASIENTO" />
+          <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+          <ScalarProperty Name="DESCRIPCION_CLASE" ColumnName="DESCRIPCION_CLASE" />
+          <ScalarProperty Name="TOTAL_ASIENTO" ColumnName="TOTAL_ASIENTO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VALIDACIONES_RESUMEN">
+      <EntityTypeMapping TypeName="ASSET_MANAGEMENTModel.VALIDACIONES_RESUMEN">
+        <MappingFragment StoreEntitySet="VALIDACIONES_RESUMEN">
+          <ScalarProperty Name="ID_TIPO_VALIDACION" ColumnName="ID_TIPO_VALIDACION" />
+          <ScalarProperty Name="ID_CLASE" ColumnName="ID_CLASE" />
+          <ScalarProperty Name="DESCRIPCION_VALIDACION" ColumnName="DESCRIPCION_VALIDACION" />
+          <ScalarProperty Name="DESCRIPCION_CLASE" ColumnName="DESCRIPCION_CLASE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="ACTUALIZAR_INFORMACION_VALIDACION" FunctionName="ASSET_MANAGEMENTModel.Store.ACTUALIZAR_INFORMACION_VALIDACION" />
+    <FunctionImportMapping FunctionImportName="CORRER_DEPRECIACION" FunctionName="ASSET_MANAGEMENTModel.Store.CORRER_DEPRECIACION">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ASSET_MANAGEMENTModel.CORRER_DEPRECIACION_Result">
+          <ScalarProperty Name="DESCRIPCION_ACTIVO" ColumnName="DESCRIPCION_ACTIVO" />
+          <ScalarProperty Name="VALOR_ADQUISICION" ColumnName="VALOR_ADQUISICION" />
+          <ScalarProperty Name="FECHA_ADQUISICION" ColumnName="FECHA_ADQUISICION" />
+          <ScalarProperty Name="PERIODOS_DEPRECIADOS" ColumnName="PERIODOS_DEPRECIADOS" />
+          <ScalarProperty Name="DESCRIPCION_CLASE" ColumnName="DESCRIPCION_CLASE" />
+          <ScalarProperty Name="VIDA_UTIL" ColumnName="VIDA_UTIL" />
+          <ScalarProperty Name="ID_CLASE" ColumnName="ID_CLASE" />
+          <ScalarProperty Name="DEPRECIACION_MENSUAL" ColumnName="DEPRECIACION_MENSUAL" />
+          <ScalarProperty Name="DEPRECIACION_ACUMULADA" ColumnName="DEPRECIACION_ACUMULADA" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ESTATUS_ACTIVOS" FunctionName="ASSET_MANAGEMENTModel.Store.ESTATUS_ACTIVOS">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ASSET_MANAGEMENTModel.ESTATUS_ACTIVOS_Result">
+          <ScalarProperty Name="TOTAL_ACTIVOS" ColumnName="TOTAL_ACTIVOS" />
+          <ScalarProperty Name="TOTAL_INVERSION" ColumnName="TOTAL_INVERSION" />
+          <ScalarProperty Name="PORCENTAJE_CUMPLIMIENTO" ColumnName="PORCENTAJE_CUMPLIMIENTO" />
+          <ScalarProperty Name="TOTAL_ACTIVOS_USUARIO" ColumnName="TOTAL_ACTIVOS_USUARIO" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="RESUMEN_ASIENTO_LINEAS_BODY" FunctionName="ASSET_MANAGEMENTModel.Store.RESUMEN_ASIENTO_LINEAS_BODY">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ASSET_MANAGEMENTModel.RESUMEN_ASIENTO_LINEAS_BODY_Result">
+          <ScalarProperty Name="ID_ASIENTO_LINEA" ColumnName="ID_ASIENTO_LINEA" />
+          <ScalarProperty Name="ID_CUENTA_CONTABLE" ColumnName="ID_CUENTA_CONTABLE" />
+          <ScalarProperty Name="DESCRIPCION_LINEA" ColumnName="DESCRIPCION_LINEA" />
+          <ScalarProperty Name="DEBITO" ColumnName="DEBITO" />
+          <ScalarProperty Name="CREDITO" ColumnName="CREDITO" />
+          <ScalarProperty Name="BALANCE" ColumnName="BALANCE" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="VALIDAR_USUARIO" FunctionName="ASSET_MANAGEMENTModel.Store.VALIDAR_USUARIO">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ASSET_MANAGEMENTModel.VALIDAR_USUARIO_Result">
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+          <ScalarProperty Name="CORREO" ColumnName="CORREO" />
+          <ScalarProperty Name="ID_ROLE" ColumnName="ID_ROLE" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="RESUMEN_USUARIOS">
+      <EntityTypeMapping TypeName="ASSET_MANAGEMENTModel.RESUMEN_USUARIOS">
+        <MappingFragment StoreEntitySet="RESUMEN_USUARIOS">
+          <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
+          <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+          <ScalarProperty Name="NOMBRE_ROLE" ColumnName="NOMBRE_ROLE" />
+          <ScalarProperty Name="ID_ROLE" ColumnName="ID_ROLE" />
+          <ScalarProperty Name="CONTRASENNA" ColumnName="CONTRASENNA" />
+          <ScalarProperty Name="CORREO" ColumnName="CORREO" />
+          <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="ACTIVAR_USUARIO" FunctionName="ASSET_MANAGEMENTModel.Store.ACTIVAR_USUARIO" />
+    <FunctionImportMapping FunctionImportName="DESACTIVAR_USUARIO" FunctionName="ASSET_MANAGEMENTModel.Store.DESACTIVAR_USUARIO" />
+    <EntitySetMapping Name="CONCILIACION_BALANCE_CLASE">
+      <EntityTypeMapping TypeName="ASSET_MANAGEMENTModel.CONCILIACION_BALANCE_CLASE">
+        <MappingFragment StoreEntitySet="CONCILIACION_BALANCE_CLASE">
+          <ScalarProperty Name="DIFERENCIA" ColumnName="DIFERENCIA" />
+          <ScalarProperty Name="VALOR_AUXILIAR" ColumnName="VALOR_AUXILIAR" />
+          <ScalarProperty Name="BALANCE" ColumnName="BALANCE" />
+          <ScalarProperty Name="DESCRIPCION_CLASE" ColumnName="DESCRIPCION_CLASE" />
+          <ScalarProperty Name="CATEGORIA_CUENTA" ColumnName="CATEGORIA_CUENTA" />
+          <ScalarProperty Name="ID_CUENTA" ColumnName="ID_CUENTA" />
+          <ScalarProperty Name="ID_CLASE" ColumnName="ID_CLASE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="CREAR_CLASE" FunctionName="ASSET_MANAGEMENTModel.Store.CREAR_CLASE" />
+  </EntityContainerMapping>
+</Mapping>
