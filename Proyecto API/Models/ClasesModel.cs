@@ -2,6 +2,7 @@
 using Proyecto_API.ModelDB;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlTypes;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -58,6 +59,23 @@ namespace Proyecto_API.Models
 
             }
         }
+
+        public ClaseEnt consultarClase(int idClase)
+        {
+            using (var conexion = new ASSET_MANAGEMENTEntities())
+            {
+                var clase = (from x in conexion.CLASE
+                             where x.ID_CLASE == idClase select x).FirstOrDefault();
+
+                ClaseEnt claseOutput = new ClaseEnt();
+
+                claseOutput.idClase = clase.ID_CLASE;
+                claseOutput.descripcionClase = clase.DESCRIPCION_CLASE;
+                claseOutput.vidaUtil = (int)clase.VIDA_UTIL; 
+
+                return claseOutput;
+            }
+        }
         
         public List<AuxiliarEnt> ejecutarDepreciacionClase(ClaseEnt clase)
         {
@@ -95,5 +113,53 @@ namespace Proyecto_API.Models
             }
         }
 
+        public List<ClaseEnt> consultarValidacionesClase()
+        {
+            using (var conexion = new ASSET_MANAGEMENTEntities())
+            {
+
+                List<ClaseEnt> validaciones = new List<ClaseEnt>(); 
+
+                foreach (var validacion in conexion.VALIDACIONES_RESUMEN.ToList())
+                {
+
+                    validaciones.Add(new ClaseEnt
+                    {
+                        idClase= validacion.ID_CLASE,
+                        descripcionClase = validacion.DESCRIPCION_CLASE,
+                        validacionClase = new ValidacionClaseEnt
+                        {
+                            idValidacion = validacion.ID_TIPO_VALIDACION,
+                            descripcionValidacion = validacion.DESCRIPCION_VALIDACION
+                        }
+
+                    });
+
+                }
+
+                return validaciones;
+
+            }
+
+        }
+        
+        public int crearValidacionClase(ClaseEnt clase)
+        {
+
+            using (var conexion = new ASSET_MANAGEMENTEntities())
+            {
+                TIPO_VALIDACION VALIDACION = new TIPO_VALIDACION();
+
+                VALIDACION.ID_CLASE = clase.idClase;
+                VALIDACION.DESCRIPCION_VALIDACION = clase.validacionClase.descripcionValidacion;
+
+                conexion.TIPO_VALIDACION.Add(VALIDACION);
+
+                return conexion.SaveChanges();
+
+            }
+
+        }
+        
     }
 }

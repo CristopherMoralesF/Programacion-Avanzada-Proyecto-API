@@ -35,6 +35,28 @@ namespace Proyecto_API.Models
             
         }
 
+        public UsuariosEnt consultarUsuario(int idUsuario)
+        {
+            using (var conexion = new ASSET_MANAGEMENTEntities())
+            {
+                var usuario = (from x in conexion.RESUMEN_USUARIOS
+                               where x.ID_USUARIO== idUsuario select x).FirstOrDefault();
+
+                UsuariosEnt usuarioOutput = new UsuariosEnt
+                {
+                    idUsuario = usuario.ID_USUARIO,
+                    nombre = usuario.NOMBRE,
+                    correo = usuario.CORREO,
+                    role = usuario.NOMBRE_ROLE,
+                    idRole = usuario.ID_ROLE,
+                    estado = usuario.ESTADO
+
+                };
+
+                return usuarioOutput;
+            }
+        }
+
         public UsuariosEnt validarUsuario(UsuariosEnt usuario)
         {
             using(var conexion = new ASSET_MANAGEMENTEntities())

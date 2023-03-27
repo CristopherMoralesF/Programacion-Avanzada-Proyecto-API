@@ -15,5 +15,7 @@ namespace Proyecto_API.Entities
         public CuentaContableEnt cuentaDepAcumulada { get; set; }
         public AsientoEnt asientoDepreciacion { get; set; }
 
+        public ValidacionClaseEnt validacionClase { get; set; }
+
     }
 }

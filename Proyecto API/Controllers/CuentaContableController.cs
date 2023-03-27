@@ -28,5 +28,12 @@ namespace Proyecto_API.Controllers
             return cuentaContableModel.crearCuenta(nuevaCuenta);
         }
 
+        [Route("api/cuentas/buscarCuenta")]
+        [HttpGet]
+        public CuentaContableEnt buscarCuenta(string idCuenta)
+        {
+            return cuentaContableModel.buscarCuenta(idCuenta);
+        }
+
     }
 }

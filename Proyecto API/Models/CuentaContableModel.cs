@@ -59,5 +59,33 @@ namespace Proyecto_API.Models
             }
         }
 
+        public CuentaContableEnt buscarCuenta(string idCuenta)
+        {
+            using (var conexion = new ASSET_MANAGEMENTEntities())
+            {
+                var resultado = (from x in conexion.CUENTA_CONTABLE
+                                 where x.ID_CUENTA == idCuenta select x).FirstOrDefault();  
+
+                CuentaContableEnt resultadoCuenta = new CuentaContableEnt();
+
+                if(resultado != null)
+                {
+                    resultadoCuenta.idCuenta = resultado.ID_CUENTA;
+                    resultadoCuenta.descripcionCuenta = resultado.DESCRIPCION_CUENTA;
+                    resultadoCuenta.categoriaCuenta = new CategoriaCuentaEnt {idCategoria = resultado.ID_CATEGORIA};
+                    resultadoCuenta.totalDebitos = Convert.ToDouble(resultado.TOTAL_DEBITOS);
+                    resultadoCuenta.totalCreditos = Convert.ToDouble(resultado.TOTAL_CREDITOS);
+                    resultadoCuenta.balance = Convert.ToDouble(resultado.BALANCE);
+                    resultadoCuenta.naturaleza = resultado.NATURALEZA;
+
+                    return resultadoCuenta;
+
+                }
+
+                return null; 
+
+            }
+        }
+
     }
 }

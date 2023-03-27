@@ -19,6 +19,13 @@ namespace Proyecto_API.Controllers
             return clasesModel.ejecutarDepreciacionClase(clase);
         }
 
+        [Route("api/consultarClase")]
+        [HttpGet]
+        public ClaseEnt consultarClase(int idClase)
+        {
+            return clasesModel.consultarClase(idClase);
+        }
+
         [Route("api/obtenerListaClases")]
         [HttpGet]
         public List<ClaseEnt> obtenerListaClases()
@@ -31,6 +38,20 @@ namespace Proyecto_API.Controllers
         public int crearClase(ClaseEnt nuevaClase)
         {
             return clasesModel.crearClase(nuevaClase); 
+        }
+
+        [Route("api/consultarValidacionesClase")]
+        [HttpGet]
+        public List<ClaseEnt> consultarValidacionesClase()
+        {
+            return clasesModel.consultarValidacionesClase(); 
+        }
+
+        [Route("api/crearValidacionClase")]
+        [HttpPost]
+        public int crearValidacionClase(ClaseEnt nuevaValidacion)
+        {
+            return clasesModel.crearValidacionClase(nuevaValidacion);
         }
     }
 }

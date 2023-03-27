@@ -20,6 +20,13 @@ namespace Proyecto_API.Controllers
             return usuariosModel.consultarUsuarios(); 
         }
 
+        [Route("api/consultarUsuario")]
+        [HttpGet]
+        public UsuariosEnt consultarUsuario(int idUsuario)
+        {
+            return usuariosModel.consultarUsuario(idUsuario);
+        }
+
         [Route("api/validarUsuario")]
         [HttpPost]
         public UsuariosEnt validarUsuario(UsuariosEnt usuarioValidar)
