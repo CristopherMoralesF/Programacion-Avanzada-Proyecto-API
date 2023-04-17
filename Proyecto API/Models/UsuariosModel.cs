@@ -73,7 +73,8 @@ namespace Proyecto_API.Models
                     nuevoUsuario.nombre = resultado.NOMBRE; 
                     nuevoUsuario.correo = resultado.CORREO;
                     nuevoUsuario.estado = resultado.ESTADO;
-                    nuevoUsuario.idRole = resultado.ID_ROLE; 
+                    nuevoUsuario.idRole = resultado.ID_ROLE;
+                    nuevoUsuario.idUsuario = resultado.ID_USUARIO; 
 
                     return nuevoUsuario; 
                 }
@@ -119,8 +120,6 @@ namespace Proyecto_API.Models
             }
         }
 
-
-
         public string buscarCorreo(string CorreoElectronico)
         {
             using(var conexion = new ASSET_MANAGEMENTEntities())
@@ -138,6 +137,25 @@ namespace Proyecto_API.Models
                     return "El correo selecionado ya existe";
                 }
             }
+        }
+
+        public int actualizarUsuario(UsuariosEnt usuarioActualizar)
+        {
+
+            using (var conexion = new ASSET_MANAGEMENTEntities())
+            {
+
+                USUARIO usuarioDB = (from x in conexion.USUARIO
+                                     where x.ID_USUARIO == usuarioActualizar.idUsuario select x).FirstOrDefault();
+
+
+                usuarioDB.NOMBRE = usuarioActualizar.nombre;
+                usuarioDB.ID_ROLE = (int)usuarioActualizar.idRole;
+
+                return conexion.SaveChanges(); 
+
+            }
+
         }
 
     }

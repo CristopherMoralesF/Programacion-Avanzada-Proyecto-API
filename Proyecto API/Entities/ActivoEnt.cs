@@ -12,7 +12,7 @@ namespace Proyecto_API.Entities
         public UbicacionEnt ubicacionActivo { get; set; }
         public UsuariosEnt duennoActivo { get; set; }
         public EstadoEnt estadoActivo { get; set; } 
-
+        public List<ValidacionClaseEnt> validacionesActivo { get; set; }
         public string descripcionActivo { get; set; }
         public double valorAdquisicion { get; set; }
         public DateTime fechaAdquiscion { get; set; }

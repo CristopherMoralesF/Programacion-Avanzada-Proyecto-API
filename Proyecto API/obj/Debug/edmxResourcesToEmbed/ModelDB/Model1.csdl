@@ -198,6 +198,7 @@
     <Key>
       <PropertyRef Name="VALOR_ADQUISICION" />
       <PropertyRef Name="ID_CLASE" />
+      <PropertyRef Name="ID_ACTIVO" />
     </Key>
     <Property Name="DESCRIPCION_ACTIVO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="VALOR_ADQUISICION" Type="Double" Nullable="false" />
@@ -208,6 +209,7 @@
     <Property Name="ID_CLASE" Type="Int32" Nullable="false" />
     <Property Name="DEPRECIACION_MENSUAL" Type="Double" />
     <Property Name="DEPRECIACION_ACUMULADA" Type="Double" />
+    <Property Name="ID_ACTIVO" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="CLASSES_LIST">
     <Key>
@@ -561,7 +563,7 @@
       <End Role="USUARIO" EntitySet="USUARIO" />
     </AssociationSet>
     <FunctionImport Name="ACTUALIZAR_INFORMACION_VALIDACION">
-      <Parameter Name="IN_ID_ASIENTO" Mode="In" Type="Int32" />
+      <Parameter Name="IN_ID_ACTIVO" Mode="In" Type="Int32" />
       <Parameter Name="IN_ID_TIPO_VALIDACION" Mode="In" Type="Int32" />
       <Parameter Name="IN_VALOR_VALIDACION" Mode="In" Type="String" />
     </FunctionImport>
@@ -594,6 +596,10 @@
       <Parameter Name="IN_EXPENSE_ACCOUNT" Mode="In" Type="String" />
       <Parameter Name="IN_USEFULL_LIFE" Mode="In" Type="Int32" />
     </FunctionImport>
+    <EntitySet Name="VALIDACION_RIESGO_ACTIVOS" EntityType="ASSET_MANAGEMENTModel.VALIDACION_RIESGO_ACTIVOS" />
+    <EntitySet Name="RESUMEN_ACTIVOS_CLASE" EntityType="ASSET_MANAGEMENTModel.RESUMEN_ACTIVOS_CLASE" />
+    <EntitySet Name="VALIDACION_RIESGO_CLASE" EntityType="ASSET_MANAGEMENTModel.VALIDACION_RIESGO_CLASE" />
+    <EntitySet Name="RESUMEN_VALIDACIONES_COMPLETAS" EntityType="ASSET_MANAGEMENTModel.RESUMEN_VALIDACIONES_COMPLETAS" />
   </EntityContainer>
   <ComplexType Name="CORRER_DEPRECIACION_Result">
     <Property Type="String" Name="DESCRIPCION_ACTIVO" Nullable="true" MaxLength="50" />
@@ -654,5 +660,50 @@
     <Property Name="BALANCE" Type="Double" />
     <Property Name="VALOR_AUXILIAR" Type="Double" />
     <Property Name="DIFERENCIA" Type="Double" />
+  </EntityType>
+  <EntityType Name="VALIDACION_RIESGO_ACTIVOS">
+    <Key>
+      <PropertyRef Name="ID_ACTIVO" />
+      <PropertyRef Name="ID_DUENNO" />
+      <PropertyRef Name="VALIDACION_RIESGO" />
+      <PropertyRef Name="ID_CLASE" />
+    </Key>
+    <Property Name="ID_ACTIVO" Type="Int32" Nullable="false" />
+    <Property Name="ID_DUENNO" Type="Int32" Nullable="false" />
+    <Property Name="DESCRIPCION_ACTIVO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DESCRIPCION_CLASE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="VALIDATION_PERCENTAJE" Type="Int32" />
+    <Property Name="VALIDACION_RIESGO" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="ID_CLASE" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RESUMEN_ACTIVOS_CLASE">
+    <Key>
+      <PropertyRef Name="ID_CLASE" />
+    </Key>
+    <Property Name="ID_CLASE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DESCRIPCION_CLASE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TOTAL_ACTIVOS" Type="Int32" />
+  </EntityType>
+  <EntityType Name="VALIDACION_RIESGO_CLASE">
+    <Key>
+      <PropertyRef Name="ID_CLASE" />
+      <PropertyRef Name="VALIDACION_RIESGO" />
+    </Key>
+    <Property Name="ID_CLASE" Type="Int32" Nullable="false" />
+    <Property Name="DESCRIPCION_CLASE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="VALIDACION_RIESGO" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="TOTAL_ACTIVOS" Type="Int32" />
+  </EntityType>
+  <EntityType Name="RESUMEN_VALIDACIONES_COMPLETAS">
+    <Key>
+      <PropertyRef Name="ID_TIPO_VALIDACION" />
+      <PropertyRef Name="DESCRIPCION_VALIDACION" />
+    </Key>
+    <Property Name="ID_ACTIVO" Type="Int32" />
+    <Property Name="ID_CLASE" Type="Int32" />
+    <Property Name="DESCRIPCION_ACTIVO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ID_TIPO_VALIDACION" Type="Int32" Nullable="false" />
+    <Property Name="DESCRIPCION_VALIDACION" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="VALOR" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
   </EntityType>
 </Schema>

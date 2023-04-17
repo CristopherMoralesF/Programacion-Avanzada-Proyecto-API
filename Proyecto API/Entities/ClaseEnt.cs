@@ -17,5 +17,8 @@ namespace Proyecto_API.Entities
 
         public ValidacionClaseEnt validacionClase { get; set; }
 
+        public int totalActivos { get; set; }   
+
+        public string categorizacionRiesgo { get; set; }    
     }
 }

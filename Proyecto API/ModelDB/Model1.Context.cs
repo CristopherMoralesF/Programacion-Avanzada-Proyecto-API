@@ -52,12 +52,16 @@ namespace Proyecto_API.ModelDB
         public virtual DbSet<VALIDACIONES_RESUMEN> VALIDACIONES_RESUMEN { get; set; }
         public virtual DbSet<RESUMEN_USUARIOS> RESUMEN_USUARIOS { get; set; }
         public virtual DbSet<CONCILIACION_BALANCE_CLASE> CONCILIACION_BALANCE_CLASE { get; set; }
+        public virtual DbSet<VALIDACION_RIESGO_ACTIVOS> VALIDACION_RIESGO_ACTIVOS { get; set; }
+        public virtual DbSet<RESUMEN_ACTIVOS_CLASE> RESUMEN_ACTIVOS_CLASE { get; set; }
+        public virtual DbSet<VALIDACION_RIESGO_CLASE> VALIDACION_RIESGO_CLASE { get; set; }
+        public virtual DbSet<RESUMEN_VALIDACIONES_COMPLETAS> RESUMEN_VALIDACIONES_COMPLETAS { get; set; }
     
-        public virtual int ACTUALIZAR_INFORMACION_VALIDACION(Nullable<int> iN_ID_ASIENTO, Nullable<int> iN_ID_TIPO_VALIDACION, string iN_VALOR_VALIDACION)
+        public virtual int ACTUALIZAR_INFORMACION_VALIDACION(Nullable<int> iN_ID_ACTIVO, Nullable<int> iN_ID_TIPO_VALIDACION, string iN_VALOR_VALIDACION)
         {
-            var iN_ID_ASIENTOParameter = iN_ID_ASIENTO.HasValue ?
-                new ObjectParameter("IN_ID_ASIENTO", iN_ID_ASIENTO) :
-                new ObjectParameter("IN_ID_ASIENTO", typeof(int));
+            var iN_ID_ACTIVOParameter = iN_ID_ACTIVO.HasValue ?
+                new ObjectParameter("IN_ID_ACTIVO", iN_ID_ACTIVO) :
+                new ObjectParameter("IN_ID_ACTIVO", typeof(int));
     
             var iN_ID_TIPO_VALIDACIONParameter = iN_ID_TIPO_VALIDACION.HasValue ?
                 new ObjectParameter("IN_ID_TIPO_VALIDACION", iN_ID_TIPO_VALIDACION) :
@@ -67,7 +71,7 @@ namespace Proyecto_API.ModelDB
                 new ObjectParameter("IN_VALOR_VALIDACION", iN_VALOR_VALIDACION) :
                 new ObjectParameter("IN_VALOR_VALIDACION", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ACTUALIZAR_INFORMACION_VALIDACION", iN_ID_ASIENTOParameter, iN_ID_TIPO_VALIDACIONParameter, iN_VALOR_VALIDACIONParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ACTUALIZAR_INFORMACION_VALIDACION", iN_ID_ACTIVOParameter, iN_ID_TIPO_VALIDACIONParameter, iN_VALOR_VALIDACIONParameter);
         }
     
         public virtual ObjectResult<CORRER_DEPRECIACION_Result> CORRER_DEPRECIACION(Nullable<int> iN_ID_CLASE, string iN_JE_DESCRIPCION)

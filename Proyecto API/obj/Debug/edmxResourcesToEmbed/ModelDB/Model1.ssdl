@@ -170,9 +170,11 @@ advertencia 6002: La tabla o vista 'ASSET_MANAGEMENT.dbo.ACCOUNTS_RESUME' no tie
 advertencia 6002: La tabla o vista 'ASSET_MANAGEMENT.dbo.AUXILIAR_DEPRECIACION' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="AUXILIAR_DEPRECIACION">
     <Key>
+      <PropertyRef Name="ID_ACTIVO" />
       <PropertyRef Name="VALOR_ADQUISICION" />
       <PropertyRef Name="ID_CLASE" />
     </Key>
+    <Property Name="ID_ACTIVO" Type="int" Nullable="false" />
     <Property Name="DESCRIPCION_ACTIVO" Type="varchar" MaxLength="50" />
     <Property Name="VALOR_ADQUISICION" Type="float" Nullable="false" />
     <Property Name="FECHA_ADQUISICION" Type="date" />
@@ -235,6 +237,16 @@ advertencia 6002: La tabla o vista 'ASSET_MANAGEMENT.dbo.RESUMEN_ACTIVOS' no tie
     <Property Name="DESCRIPCION_ESTADO" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ASSET_MANAGEMENT.dbo.RESUMEN_ACTIVOS_CLASE' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="RESUMEN_ACTIVOS_CLASE">
+    <Key>
+      <PropertyRef Name="ID_CLASE" />
+    </Key>
+    <Property Name="ID_CLASE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DESCRIPCION_CLASE" Type="varchar" MaxLength="50" />
+    <Property Name="TOTAL_ACTIVOS" Type="int" />
+  </EntityType>
+  <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'ASSET_MANAGEMENT.dbo.RESUMEN_ASIENTO_LINEAS' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="RESUMEN_ASIENTO_LINEAS">
     <Key>
@@ -284,6 +296,49 @@ advertencia 6002: La tabla o vista 'ASSET_MANAGEMENT.dbo.RESUMEN_USUARIOS' no ti
     <Property Name="ID_ROLE" Type="int" Nullable="false" />
     <Property Name="ESTADO" Type="int" Nullable="false" />
     <Property Name="NOMBRE_ROLE" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ASSET_MANAGEMENT.dbo.RESUMEN_VALIDACIONES_COMPLETAS' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="RESUMEN_VALIDACIONES_COMPLETAS">
+    <Key>
+      <PropertyRef Name="ID_TIPO_VALIDACION" />
+      <PropertyRef Name="DESCRIPCION_VALIDACION" />
+    </Key>
+    <Property Name="ID_ACTIVO" Type="int" />
+    <Property Name="ID_CLASE" Type="int" />
+    <Property Name="DESCRIPCION_ACTIVO" Type="varchar" MaxLength="50" />
+    <Property Name="ID_TIPO_VALIDACION" Type="int" Nullable="false" />
+    <Property Name="DESCRIPCION_VALIDACION" Type="varchar" MaxLength="60" Nullable="false" />
+    <Property Name="VALOR" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ASSET_MANAGEMENT.dbo.VALIDACION_RIESGO_ACTIVOS' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="VALIDACION_RIESGO_ACTIVOS">
+    <Key>
+      <PropertyRef Name="ID_ACTIVO" />
+      <PropertyRef Name="ID_DUENNO" />
+      <PropertyRef Name="ID_CLASE" />
+      <PropertyRef Name="VALIDACION_RIESGO" />
+    </Key>
+    <Property Name="ID_ACTIVO" Type="int" Nullable="false" />
+    <Property Name="ID_DUENNO" Type="int" Nullable="false" />
+    <Property Name="DESCRIPCION_ACTIVO" Type="varchar" MaxLength="50" />
+    <Property Name="DESCRIPCION_CLASE" Type="varchar" MaxLength="50" />
+    <Property Name="ID_CLASE" Type="int" Nullable="false" />
+    <Property Name="VALIDATION_PERCENTAJE" Type="int" />
+    <Property Name="VALIDACION_RIESGO" Type="varchar" MaxLength="1" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'ASSET_MANAGEMENT.dbo.VALIDACION_RIESGO_CLASE' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="VALIDACION_RIESGO_CLASE">
+    <Key>
+      <PropertyRef Name="ID_CLASE" />
+      <PropertyRef Name="VALIDACION_RIESGO" />
+    </Key>
+    <Property Name="ID_CLASE" Type="int" Nullable="false" />
+    <Property Name="DESCRIPCION_CLASE" Type="varchar" MaxLength="50" />
+    <Property Name="VALIDACION_RIESGO" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="TOTAL_ACTIVOS" Type="int" />
   </EntityType>
   <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'ASSET_MANAGEMENT.dbo.VALIDACIONES_RESUMEN' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -494,7 +549,7 @@ advertencia 6002: La tabla o vista 'ASSET_MANAGEMENT.dbo.VALIDACIONES_RESUMEN' n
     <Parameter Name="ID_USUARIO" Type="int" Mode="In" />
   </Function>
   <Function Name="ACTUALIZAR_INFORMACION_VALIDACION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="IN_ID_ASIENTO" Type="int" Mode="In" />
+    <Parameter Name="IN_ID_ACTIVO" Type="int" Mode="In" />
     <Parameter Name="IN_ID_TIPO_VALIDACION" Type="int" Mode="In" />
     <Parameter Name="IN_VALOR_VALIDACION" Type="varchar" Mode="In" />
   </Function>
@@ -558,6 +613,7 @@ advertencia 6002: La tabla o vista 'ASSET_MANAGEMENT.dbo.VALIDACIONES_RESUMEN' n
     </EntitySet>
     <EntitySet Name="AUXILIAR_DEPRECIACION" EntityType="Self.AUXILIAR_DEPRECIACION" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
+    [AUXILIAR_DEPRECIACION].[ID_ACTIVO] AS [ID_ACTIVO], 
     [AUXILIAR_DEPRECIACION].[DESCRIPCION_ACTIVO] AS [DESCRIPCION_ACTIVO], 
     [AUXILIAR_DEPRECIACION].[VALOR_ADQUISICION] AS [VALOR_ADQUISICION], 
     [AUXILIAR_DEPRECIACION].[FECHA_ADQUISICION] AS [FECHA_ADQUISICION], 
@@ -605,6 +661,13 @@ advertencia 6002: La tabla o vista 'ASSET_MANAGEMENT.dbo.VALIDACIONES_RESUMEN' n
     [RESUMEN_ACTIVOS].[DESCRIPCION_ESTADO] AS [DESCRIPCION_ESTADO]
     FROM [dbo].[RESUMEN_ACTIVOS] AS [RESUMEN_ACTIVOS]</DefiningQuery>
     </EntitySet>
+    <EntitySet Name="RESUMEN_ACTIVOS_CLASE" EntityType="Self.RESUMEN_ACTIVOS_CLASE" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [RESUMEN_ACTIVOS_CLASE].[ID_CLASE] AS [ID_CLASE], 
+    [RESUMEN_ACTIVOS_CLASE].[DESCRIPCION_CLASE] AS [DESCRIPCION_CLASE], 
+    [RESUMEN_ACTIVOS_CLASE].[TOTAL_ACTIVOS] AS [TOTAL_ACTIVOS]
+    FROM [dbo].[RESUMEN_ACTIVOS_CLASE] AS [RESUMEN_ACTIVOS_CLASE]</DefiningQuery>
+    </EntitySet>
     <EntitySet Name="RESUMEN_ASIENTO_LINEAS" EntityType="Self.RESUMEN_ASIENTO_LINEAS" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [RESUMEN_ASIENTO_LINEAS].[ID_ASIENTO_LINEA] AS [ID_ASIENTO_LINEA], 
@@ -634,6 +697,35 @@ advertencia 6002: La tabla o vista 'ASSET_MANAGEMENT.dbo.VALIDACIONES_RESUMEN' n
     [RESUMEN_USUARIOS].[ESTADO] AS [ESTADO], 
     [RESUMEN_USUARIOS].[NOMBRE_ROLE] AS [NOMBRE_ROLE]
     FROM [dbo].[RESUMEN_USUARIOS] AS [RESUMEN_USUARIOS]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="RESUMEN_VALIDACIONES_COMPLETAS" EntityType="Self.RESUMEN_VALIDACIONES_COMPLETAS" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [RESUMEN_VALIDACIONES_COMPLETAS].[ID_ACTIVO] AS [ID_ACTIVO], 
+    [RESUMEN_VALIDACIONES_COMPLETAS].[ID_CLASE] AS [ID_CLASE], 
+    [RESUMEN_VALIDACIONES_COMPLETAS].[DESCRIPCION_ACTIVO] AS [DESCRIPCION_ACTIVO], 
+    [RESUMEN_VALIDACIONES_COMPLETAS].[ID_TIPO_VALIDACION] AS [ID_TIPO_VALIDACION], 
+    [RESUMEN_VALIDACIONES_COMPLETAS].[DESCRIPCION_VALIDACION] AS [DESCRIPCION_VALIDACION], 
+    [RESUMEN_VALIDACIONES_COMPLETAS].[VALOR] AS [VALOR]
+    FROM [dbo].[RESUMEN_VALIDACIONES_COMPLETAS] AS [RESUMEN_VALIDACIONES_COMPLETAS]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="VALIDACION_RIESGO_ACTIVOS" EntityType="Self.VALIDACION_RIESGO_ACTIVOS" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [VALIDACION_RIESGO_ACTIVOS].[ID_ACTIVO] AS [ID_ACTIVO], 
+    [VALIDACION_RIESGO_ACTIVOS].[ID_DUENNO] AS [ID_DUENNO], 
+    [VALIDACION_RIESGO_ACTIVOS].[DESCRIPCION_ACTIVO] AS [DESCRIPCION_ACTIVO], 
+    [VALIDACION_RIESGO_ACTIVOS].[DESCRIPCION_CLASE] AS [DESCRIPCION_CLASE], 
+    [VALIDACION_RIESGO_ACTIVOS].[ID_CLASE] AS [ID_CLASE], 
+    [VALIDACION_RIESGO_ACTIVOS].[VALIDATION_PERCENTAJE] AS [VALIDATION_PERCENTAJE], 
+    [VALIDACION_RIESGO_ACTIVOS].[VALIDACION_RIESGO] AS [VALIDACION_RIESGO]
+    FROM [dbo].[VALIDACION_RIESGO_ACTIVOS] AS [VALIDACION_RIESGO_ACTIVOS]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="VALIDACION_RIESGO_CLASE" EntityType="Self.VALIDACION_RIESGO_CLASE" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [VALIDACION_RIESGO_CLASE].[ID_CLASE] AS [ID_CLASE], 
+    [VALIDACION_RIESGO_CLASE].[DESCRIPCION_CLASE] AS [DESCRIPCION_CLASE], 
+    [VALIDACION_RIESGO_CLASE].[VALIDACION_RIESGO] AS [VALIDACION_RIESGO], 
+    [VALIDACION_RIESGO_CLASE].[TOTAL_ACTIVOS] AS [TOTAL_ACTIVOS]
+    FROM [dbo].[VALIDACION_RIESGO_CLASE] AS [VALIDACION_RIESGO_CLASE]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="VALIDACIONES_RESUMEN" EntityType="Self.VALIDACIONES_RESUMEN" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 

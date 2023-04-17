@@ -22,10 +22,10 @@
         <EntityTypeShape EntityType="ASSET_MANAGEMENTModel.VALIDACION" Width="1.5" PointX="5.25" PointY="13.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ASSET_MANAGEMENTModel.ACCOUNTS_BALANCE_RESUME" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ASSET_MANAGEMENTModel.ACCOUNTS_RESUME" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ASSET_MANAGEMENTModel.AUXILIAR_DEPRECIACION" Width="1.5" PointX="8.625" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASSET_MANAGEMENTModel.AUXILIAR_DEPRECIACION" Width="2.75" PointX="7.625" PointY="6.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ASSET_MANAGEMENTModel.CLASSES_LIST" Width="1.5" PointX="8.625" PointY="10" IsExpanded="true" />
-        <EntityTypeShape EntityType="ASSET_MANAGEMENTModel.RESUMEN_ACTIVOS" Width="1.5" PointX="12.625" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ASSET_MANAGEMENTModel.RESUMEN_ASIENTO_LINEAS" Width="1.5" PointX="12.5" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASSET_MANAGEMENTModel.RESUMEN_ACTIVOS" Width="3.375" PointX="10.625" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ASSET_MANAGEMENTModel.RESUMEN_ASIENTO_LINEAS" Width="2.625" PointX="11.125" PointY="7.25" IsExpanded="true" />
         <EntityTypeShape EntityType="ASSET_MANAGEMENTModel.RESUMEN_ASIENTOS" Width="1.5" PointX="12.25" PointY="10.625" IsExpanded="true" />
         <EntityTypeShape EntityType="ASSET_MANAGEMENTModel.VALIDACIONES_RESUMEN" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="ASSET_MANAGEMENTModel.FK_ACTIVO_CLASE" ManuallyRouted="false" />
@@ -46,6 +46,10 @@
         <AssociationConnector Association="ASSET_MANAGEMENTModel.FK_ROLE_USUARIO" ManuallyRouted="false" />
         <EntityTypeShape EntityType="ASSET_MANAGEMENTModel.RESUMEN_USUARIOS" Width="1.5" PointX="7.375" PointY="13.75" />
         <EntityTypeShape EntityType="ASSET_MANAGEMENTModel.CONCILIACION_BALANCE_CLASE" Width="1.5" PointX="10.625" PointY="14" />
+        <EntityTypeShape EntityType="ASSET_MANAGEMENTModel.VALIDACION_RIESGO_ACTIVOS" Width="1.5" PointX="13.375" PointY="13.75" />
+        <EntityTypeShape EntityType="ASSET_MANAGEMENTModel.RESUMEN_ACTIVOS_CLASE" Width="1.5" PointX="14.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ASSET_MANAGEMENTModel.VALIDACION_RIESGO_CLASE" Width="1.5" PointX="14.375" PointY="7.75" />
+        <EntityTypeShape EntityType="ASSET_MANAGEMENTModel.RESUMEN_VALIDACIONES_COMPLETAS" Width="1.5" PointX="14.375" PointY="10.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

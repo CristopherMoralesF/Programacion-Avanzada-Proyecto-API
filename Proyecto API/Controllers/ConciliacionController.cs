@@ -21,5 +21,19 @@ namespace Proyecto_API.Controllers
             return conciliacionModel.consultarConciliacion();
         }
 
+
+        [Route("api/agregarValidacionActivo")]
+        [HttpPost]
+        public int completarValidacion (ValidacionClaseEnt nuevaValidacion)
+        {
+            return conciliacionModel.completarValidacion(nuevaValidacion);  
+        }
+
+        [Route("api/modificarValidacionActivo")]
+        [HttpPost]
+        public int modificarValidacion(ValidacionClaseEnt nuevaValidacion)
+        {
+            return conciliacionModel.modificarValidacion(nuevaValidacion);
+        }
     }
 }

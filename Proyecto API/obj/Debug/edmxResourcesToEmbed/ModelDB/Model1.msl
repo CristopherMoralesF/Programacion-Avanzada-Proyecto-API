@@ -179,6 +179,7 @@
     <EntitySetMapping Name="AUXILIAR_DEPRECIACION">
       <EntityTypeMapping TypeName="ASSET_MANAGEMENTModel.AUXILIAR_DEPRECIACION">
         <MappingFragment StoreEntitySet="AUXILIAR_DEPRECIACION">
+          <ScalarProperty Name="ID_ACTIVO" ColumnName="ID_ACTIVO" />
           <ScalarProperty Name="DESCRIPCION_ACTIVO" ColumnName="DESCRIPCION_ACTIVO" />
           <ScalarProperty Name="VALOR_ADQUISICION" ColumnName="VALOR_ADQUISICION" />
           <ScalarProperty Name="FECHA_ADQUISICION" ColumnName="FECHA_ADQUISICION" />
@@ -329,5 +330,49 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="CREAR_CLASE" FunctionName="ASSET_MANAGEMENTModel.Store.CREAR_CLASE" />
+    <EntitySetMapping Name="VALIDACION_RIESGO_ACTIVOS">
+      <EntityTypeMapping TypeName="ASSET_MANAGEMENTModel.VALIDACION_RIESGO_ACTIVOS">
+        <MappingFragment StoreEntitySet="VALIDACION_RIESGO_ACTIVOS">
+          <ScalarProperty Name="ID_CLASE" ColumnName="ID_CLASE" />
+          <ScalarProperty Name="VALIDACION_RIESGO" ColumnName="VALIDACION_RIESGO" />
+          <ScalarProperty Name="VALIDATION_PERCENTAJE" ColumnName="VALIDATION_PERCENTAJE" />
+          <ScalarProperty Name="DESCRIPCION_CLASE" ColumnName="DESCRIPCION_CLASE" />
+          <ScalarProperty Name="DESCRIPCION_ACTIVO" ColumnName="DESCRIPCION_ACTIVO" />
+          <ScalarProperty Name="ID_DUENNO" ColumnName="ID_DUENNO" />
+          <ScalarProperty Name="ID_ACTIVO" ColumnName="ID_ACTIVO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RESUMEN_ACTIVOS_CLASE">
+      <EntityTypeMapping TypeName="ASSET_MANAGEMENTModel.RESUMEN_ACTIVOS_CLASE">
+        <MappingFragment StoreEntitySet="RESUMEN_ACTIVOS_CLASE">
+          <ScalarProperty Name="TOTAL_ACTIVOS" ColumnName="TOTAL_ACTIVOS" />
+          <ScalarProperty Name="DESCRIPCION_CLASE" ColumnName="DESCRIPCION_CLASE" />
+          <ScalarProperty Name="ID_CLASE" ColumnName="ID_CLASE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VALIDACION_RIESGO_CLASE">
+      <EntityTypeMapping TypeName="ASSET_MANAGEMENTModel.VALIDACION_RIESGO_CLASE">
+        <MappingFragment StoreEntitySet="VALIDACION_RIESGO_CLASE">
+          <ScalarProperty Name="TOTAL_ACTIVOS" ColumnName="TOTAL_ACTIVOS" />
+          <ScalarProperty Name="VALIDACION_RIESGO" ColumnName="VALIDACION_RIESGO" />
+          <ScalarProperty Name="DESCRIPCION_CLASE" ColumnName="DESCRIPCION_CLASE" />
+          <ScalarProperty Name="ID_CLASE" ColumnName="ID_CLASE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RESUMEN_VALIDACIONES_COMPLETAS">
+      <EntityTypeMapping TypeName="ASSET_MANAGEMENTModel.RESUMEN_VALIDACIONES_COMPLETAS">
+        <MappingFragment StoreEntitySet="RESUMEN_VALIDACIONES_COMPLETAS">
+          <ScalarProperty Name="VALOR" ColumnName="VALOR" />
+          <ScalarProperty Name="DESCRIPCION_VALIDACION" ColumnName="DESCRIPCION_VALIDACION" />
+          <ScalarProperty Name="ID_TIPO_VALIDACION" ColumnName="ID_TIPO_VALIDACION" />
+          <ScalarProperty Name="DESCRIPCION_ACTIVO" ColumnName="DESCRIPCION_ACTIVO" />
+          <ScalarProperty Name="ID_CLASE" ColumnName="ID_CLASE" />
+          <ScalarProperty Name="ID_ACTIVO" ColumnName="ID_ACTIVO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

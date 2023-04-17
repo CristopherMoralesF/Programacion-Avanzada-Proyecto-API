@@ -27,6 +27,20 @@ namespace Proyecto_API.Controllers
             return activoModel.consultarActivos();
         }
 
+        [Route("api/activo/consultarAuxiliarActivos")]
+        [HttpGet]
+        public List<AuxiliarEnt> consultarAuxiliarActivos()
+        {
+            return activoModel.consultarAuxiliarActivos(); 
+        }
+
+        [Route("api/activo/consultarActivosUsuario")]
+        [HttpGet]
+        public List<ActivoEnt> consultarActivosUsuario(int idUsuario) 
+        {
+            return activoModel.consultarActivosUsuario(idUsuario);
+        }
+
         [Route("api/activo/crearActivo")]
         [HttpPost]
         public int crearActivo(ActivoEnt nuevoActivo)

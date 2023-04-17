@@ -9,6 +9,7 @@ namespace Proyecto_API.Entities
     {
         // ---------------- Se usa solamente con clases ----------------
         public int idValidacion { get; set; }
+        public int idActivo { get; set; }
         public string descripcionValidacion { get; set; }
 
         // ---------------- Se usa solamente con activos ----------------

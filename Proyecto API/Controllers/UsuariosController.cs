@@ -63,5 +63,12 @@ namespace Proyecto_API.Controllers
             return usuariosModel.activarUsuario(idUsuario);
         }
 
+        [Route("api/actualizarUsuario")]
+        [HttpPost]
+        public int actualizarUsuario(UsuariosEnt usuarioActualizar)
+        {
+            return usuariosModel.actualizarUsuario(usuarioActualizar); 
+        }
+
     }
 }

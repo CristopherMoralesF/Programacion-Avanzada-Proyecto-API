@@ -169,6 +169,7 @@
     <Compile Include="Controllers\CuentaContableController.cs" />
     <Compile Include="Controllers\EstadoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IndicadoresController.cs" />
     <Compile Include="Controllers\UbicacionController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Entities\ActivoEnt.cs" />
@@ -180,6 +181,8 @@
     <Compile Include="Entities\ConciliacionEnt.cs" />
     <Compile Include="Entities\CuentaContableEnt.cs" />
     <Compile Include="Entities\EstadoEnt.cs" />
+    <Compile Include="Entities\IndicadoresEnt.cs" />
+    <Compile Include="Entities\IndicadoresRiesgoEnt.cs" />
     <Compile Include="Entities\UbicacionEnt.cs" />
     <Compile Include="Entities\UsuariosEnt.cs" />
     <Compile Include="Entities\ValidacionClaseEnt.cs" />
@@ -252,6 +255,9 @@
     <Compile Include="ModelDB\RESUMEN_ACTIVOS.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModelDB\RESUMEN_ACTIVOS_CLASE.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="ModelDB\RESUMEN_ASIENTOS.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -262,6 +268,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="ModelDB\RESUMEN_USUARIOS.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelDB\RESUMEN_VALIDACIONES_COMPLETAS.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="ModelDB\sysdiagrams.cs">
@@ -285,6 +294,12 @@
     <Compile Include="ModelDB\VALIDACIONES_RESUMEN.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModelDB\VALIDACION_RIESGO_ACTIVOS.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelDB\VALIDACION_RIESGO_CLASE.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="ModelDB\VALIDAR_USUARIO_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -294,6 +309,7 @@
     <Compile Include="Models\ConciliacionModel.cs" />
     <Compile Include="Models\CuentaContableModel.cs" />
     <Compile Include="Models\EstadoModel.cs" />
+    <Compile Include="Models\IndicadoresModel.cs" />
     <Compile Include="Models\UbicacionModel.cs" />
     <Compile Include="Models\UsuariosModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
