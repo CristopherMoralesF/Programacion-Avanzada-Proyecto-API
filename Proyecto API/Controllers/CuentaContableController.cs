@@ -9,6 +9,7 @@ using System.Web.Http;
 
 namespace Proyecto_API.Controllers
 {
+    [Authorize]
     public class CuentaContableController : ApiController
     {
         
@@ -33,6 +34,13 @@ namespace Proyecto_API.Controllers
         public CuentaContableEnt buscarCuenta(string idCuenta)
         {
             return cuentaContableModel.buscarCuenta(idCuenta);
+        }
+
+        [Route("api/cuentas/validarCuentaContableClase")]
+        [HttpGet]
+        public Boolean validarCuentaContableClase(string idCuenta)
+        {
+            return cuentaContableModel.validarCuentaContableClase(idCuenta); 
         }
 
     }

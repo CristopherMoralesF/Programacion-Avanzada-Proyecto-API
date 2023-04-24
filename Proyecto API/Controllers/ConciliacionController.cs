@@ -9,6 +9,7 @@ using System.Web.Http;
 
 namespace Proyecto_API.Controllers
 {
+    [Authorize]
     public class ConciliacionController : ApiController
     {
 

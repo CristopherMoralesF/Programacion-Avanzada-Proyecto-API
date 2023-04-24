@@ -10,6 +10,9 @@ namespace Proyecto_API.Models
 {
     public class AsientoModel
     {
+
+        ClasesModel clasesModel = new ClasesModel(); 
+
         public List<AsientoEnt> consultarAsientos()
         {
             using(var conexion = new ASSET_MANAGEMENTEntities())
@@ -43,7 +46,7 @@ namespace Proyecto_API.Models
                         asientos.Add(new AsientoEnt
                         {
                             idAsiento = asiento.ID_ASIENTO,
-                            clase = new ClaseEnt { idClase = 0 },
+                            clase = new ClaseEnt { idClase = 0, descripcionClase = "No Activos" },
                             fecha = asiento.FECHA,
                             descripcion = asiento.DESCRIPCION,
                             cuerpoAsiento = lineasAsiento
@@ -52,14 +55,15 @@ namespace Proyecto_API.Models
                     }
                     else
                     {
+
                         asientos.Add(new AsientoEnt
                         {
                             idAsiento = asiento.ID_ASIENTO,
-                            clase = new ClaseEnt { idClase = (int)asiento.ID_CLASE },
+                            clase = clasesModel.consultarClase((int)asiento.ID_CLASE),
                             fecha = asiento.FECHA,
                             descripcion = asiento.DESCRIPCION,
                             cuerpoAsiento = lineasAsiento
-                        });
+                        }) ;
 
                     }
 

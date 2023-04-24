@@ -50,6 +50,7 @@
         <EntityTypeShape EntityType="ASSET_MANAGEMENTModel.RESUMEN_ACTIVOS_CLASE" Width="1.5" PointX="14.375" PointY="0.75" />
         <EntityTypeShape EntityType="ASSET_MANAGEMENTModel.VALIDACION_RIESGO_CLASE" Width="1.5" PointX="14.375" PointY="7.75" />
         <EntityTypeShape EntityType="ASSET_MANAGEMENTModel.RESUMEN_VALIDACIONES_COMPLETAS" Width="1.5" PointX="14.375" PointY="10.75" />
+        <EntityTypeShape EntityType="ASSET_MANAGEMENTModel.BITACORA_ERRORES" Width="1.5" PointX="15.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

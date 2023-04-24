@@ -14,6 +14,8 @@ namespace Proyecto_API.Entities
         public string role { get; set; }    
         public int idRole { get; set; }
         public int estado { get; set; }
+        public int estadoContrasenna { get; set; }
+        public string Token { get; set; }
 
     }
 }

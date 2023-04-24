@@ -149,6 +149,7 @@
     <NavigationProperty Name="ACTIVO" Relationship="Self.FK_ACTIVO_DUENNO" FromRole="USUARIO" ToRole="ACTIVO" />
     <NavigationProperty Name="USUARIO_ROLE" Relationship="Self.FK_ROLE_USUARIO" FromRole="USUARIO" ToRole="USUARIO_ROLE" />
     <Property Name="ESTADO" Type="Int32" Nullable="false" />
+    <Property Name="ESTADO_CONTRASENNA" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="USUARIO_ROLE">
     <Key>
@@ -600,6 +601,11 @@
     <EntitySet Name="RESUMEN_ACTIVOS_CLASE" EntityType="ASSET_MANAGEMENTModel.RESUMEN_ACTIVOS_CLASE" />
     <EntitySet Name="VALIDACION_RIESGO_CLASE" EntityType="ASSET_MANAGEMENTModel.VALIDACION_RIESGO_CLASE" />
     <EntitySet Name="RESUMEN_VALIDACIONES_COMPLETAS" EntityType="ASSET_MANAGEMENTModel.RESUMEN_VALIDACIONES_COMPLETAS" />
+    <EntitySet Name="BITACORA_ERRORES" EntityType="ASSET_MANAGEMENTModel.BITACORA_ERRORES" />
+    <FunctionImport Name="MODIFICAR_CLASE">
+      <Parameter Name="IN_ID_ACTIVO" Mode="In" Type="Int32" />
+      <Parameter Name="IN_ID_NUEVA_CLASE" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="CORRER_DEPRECIACION_Result">
     <Property Type="String" Name="DESCRIPCION_ACTIVO" Nullable="true" MaxLength="50" />
@@ -705,5 +711,14 @@
     <Property Name="ID_TIPO_VALIDACION" Type="Int32" Nullable="false" />
     <Property Name="DESCRIPCION_VALIDACION" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
     <Property Name="VALOR" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="BITACORA_ERRORES">
+    <Key>
+      <PropertyRef Name="ID_ERROR" />
+    </Key>
+    <Property Name="ID_ERROR" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PANTALLA" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="ERROR" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="FECHA" Type="DateTime" Precision="3" />
   </EntityType>
 </Schema>

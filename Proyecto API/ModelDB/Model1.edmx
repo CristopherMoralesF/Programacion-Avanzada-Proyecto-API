@@ -39,6 +39,15 @@
           <Property Name="DEBITO" Type="float" Nullable="false" />
           <Property Name="CREDITO" Type="float" Nullable="false" />
         </EntityType>
+        <EntityType Name="BITACORA_ERRORES">
+          <Key>
+            <PropertyRef Name="ID_ERROR" />
+          </Key>
+          <Property Name="ID_ERROR" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PANTALLA" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="ERROR" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="FECHA" Type="datetime" />
+        </EntityType>
         <EntityType Name="CATEGORIA_CUENTA">
           <Key>
             <PropertyRef Name="ID_CATEGORIA" />
@@ -125,6 +134,7 @@
           <Property Name="CONTRASENNA" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="ID_ROLE" Type="int" Nullable="false" />
           <Property Name="ESTADO" Type="int" Nullable="false" />
+          <Property Name="ESTADO_CONTRASENNA" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="USUARIO_ROLE">
           <Key>
@@ -247,7 +257,7 @@ advertencia 6002: La tabla o vista 'ASSET_MANAGEMENT.dbo.RESUMEN_ACTIVOS_CLASE' 
           <Key>
             <PropertyRef Name="ID_CLASE" />
           </Key>
-          <Property Name="ID_CLASE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_CLASE" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="DESCRIPCION_CLASE" Type="varchar" MaxLength="50" />
           <Property Name="TOTAL_ACTIVOS" Type="int" />
         </EntityType>
@@ -575,6 +585,10 @@ advertencia 6002: La tabla o vista 'ASSET_MANAGEMENT.dbo.VALIDACIONES_RESUMEN' n
         <Function Name="ESTATUS_ACTIVOS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IN_ID_USUARIO" Type="int" Mode="In" />
         </Function>
+        <Function Name="MODIFICAR_CLASE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IN_ID_ACTIVO" Type="int" Mode="In" />
+          <Parameter Name="IN_ID_NUEVA_CLASE" Type="int" Mode="In" />
+        </Function>
         <Function Name="RESUMEN_ASIENTO_LINEAS_BODY" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IN_ASIENTO_ID" Type="int" Mode="In" />
         </Function>
@@ -586,6 +600,7 @@ advertencia 6002: La tabla o vista 'ASSET_MANAGEMENT.dbo.VALIDACIONES_RESUMEN' n
           <EntitySet Name="ACTIVO" EntityType="Self.ACTIVO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ASIENTO" EntityType="Self.ASIENTO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ASIENTO_LINEA" EntityType="Self.ASIENTO_LINEA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BITACORA_ERRORES" EntityType="Self.BITACORA_ERRORES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CATEGORIA_CUENTA" EntityType="Self.CATEGORIA_CUENTA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CLASE" EntityType="Self.CLASE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CLASE_CUENTA" EntityType="Self.CLASE_CUENTA" Schema="dbo" store:Type="Tables" />
@@ -958,6 +973,7 @@ advertencia 6002: La tabla o vista 'ASSET_MANAGEMENT.dbo.VALIDACIONES_RESUMEN' n
           <NavigationProperty Name="ACTIVO" Relationship="Self.FK_ACTIVO_DUENNO" FromRole="USUARIO" ToRole="ACTIVO" />
           <NavigationProperty Name="USUARIO_ROLE" Relationship="Self.FK_ROLE_USUARIO" FromRole="USUARIO" ToRole="USUARIO_ROLE" />
           <Property Name="ESTADO" Type="Int32" Nullable="false" />
+          <Property Name="ESTADO_CONTRASENNA" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="USUARIO_ROLE">
           <Key>
@@ -1409,6 +1425,11 @@ advertencia 6002: La tabla o vista 'ASSET_MANAGEMENT.dbo.VALIDACIONES_RESUMEN' n
           <EntitySet Name="RESUMEN_ACTIVOS_CLASE" EntityType="ASSET_MANAGEMENTModel.RESUMEN_ACTIVOS_CLASE" />
           <EntitySet Name="VALIDACION_RIESGO_CLASE" EntityType="ASSET_MANAGEMENTModel.VALIDACION_RIESGO_CLASE" />
           <EntitySet Name="RESUMEN_VALIDACIONES_COMPLETAS" EntityType="ASSET_MANAGEMENTModel.RESUMEN_VALIDACIONES_COMPLETAS" />
+          <EntitySet Name="BITACORA_ERRORES" EntityType="ASSET_MANAGEMENTModel.BITACORA_ERRORES" />
+          <FunctionImport Name="MODIFICAR_CLASE">
+            <Parameter Name="IN_ID_ACTIVO" Mode="In" Type="Int32" />
+            <Parameter Name="IN_ID_NUEVA_CLASE" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="CORRER_DEPRECIACION_Result">
           <Property Type="String" Name="DESCRIPCION_ACTIVO" Nullable="true" MaxLength="50" />
@@ -1514,6 +1535,15 @@ advertencia 6002: La tabla o vista 'ASSET_MANAGEMENT.dbo.VALIDACIONES_RESUMEN' n
           <Property Name="ID_TIPO_VALIDACION" Type="Int32" Nullable="false" />
           <Property Name="DESCRIPCION_VALIDACION" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
           <Property Name="VALOR" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="BITACORA_ERRORES">
+          <Key>
+            <PropertyRef Name="ID_ERROR" />
+          </Key>
+          <Property Name="ID_ERROR" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PANTALLA" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ERROR" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FECHA" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1646,6 +1676,7 @@ advertencia 6002: La tabla o vista 'ASSET_MANAGEMENT.dbo.VALIDACIONES_RESUMEN' n
           <EntitySetMapping Name="USUARIO">
             <EntityTypeMapping TypeName="ASSET_MANAGEMENTModel.USUARIO">
               <MappingFragment StoreEntitySet="USUARIO">
+                <ScalarProperty Name="ESTADO_CONTRASENNA" ColumnName="ESTADO_CONTRASENNA" />
                 <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
                 <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
                 <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
@@ -1894,6 +1925,17 @@ advertencia 6002: La tabla o vista 'ASSET_MANAGEMENT.dbo.VALIDACIONES_RESUMEN' n
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="BITACORA_ERRORES">
+            <EntityTypeMapping TypeName="ASSET_MANAGEMENTModel.BITACORA_ERRORES">
+              <MappingFragment StoreEntitySet="BITACORA_ERRORES">
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="ERROR" ColumnName="ERROR" />
+                <ScalarProperty Name="PANTALLA" ColumnName="PANTALLA" />
+                <ScalarProperty Name="ID_ERROR" ColumnName="ID_ERROR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="MODIFICAR_CLASE" FunctionName="ASSET_MANAGEMENTModel.Store.MODIFICAR_CLASE" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

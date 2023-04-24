@@ -14,6 +14,7 @@ namespace Proyecto_API.Controllers
         UsuariosModel usuariosModel = new UsuariosModel();
 
         [Route("api/optenerUsuarios")]
+        [Authorize]
         [HttpGet]
         public List<UsuariosEnt> consultarUsuarios()
         {
@@ -21,6 +22,7 @@ namespace Proyecto_API.Controllers
         }
 
         [Route("api/consultarUsuario")]
+        [Authorize]
         [HttpGet]
         public UsuariosEnt consultarUsuario(int idUsuario)
         {
@@ -28,6 +30,7 @@ namespace Proyecto_API.Controllers
         }
 
         [Route("api/validarUsuario")]
+        [AllowAnonymous]
         [HttpPost]
         public UsuariosEnt validarUsuario(UsuariosEnt usuarioValidar)
         {
@@ -35,6 +38,7 @@ namespace Proyecto_API.Controllers
         }
 
         [Route("api/crearUsurio")]
+        [AllowAnonymous]
         [HttpPost]
         public int crearUsuario(UsuariosEnt usuario)
         {
@@ -43,6 +47,7 @@ namespace Proyecto_API.Controllers
         }
 
         [Route("api/buscarCorreo")]
+        [AllowAnonymous]
         [HttpGet]
         public string buscarCorreo(string correoElectronico)
         {
@@ -57,6 +62,7 @@ namespace Proyecto_API.Controllers
         }
 
         [Route("api/activarUsuario")]
+        [Authorize]
         [HttpGet]
         public int activarUsuario(int idUsuario)
         {
@@ -64,10 +70,27 @@ namespace Proyecto_API.Controllers
         }
 
         [Route("api/actualizarUsuario")]
+        [Authorize]
         [HttpPost]
         public int actualizarUsuario(UsuariosEnt usuarioActualizar)
         {
             return usuariosModel.actualizarUsuario(usuarioActualizar); 
+        }
+
+        [Route("api/restaurarContrasenna")]
+        [AllowAnonymous]
+        [HttpPut]
+        public int restaurarContraseña(UsuariosEnt usuarioActualizar)
+        {
+            return usuariosModel.restaurarContraseña(usuarioActualizar);
+        }
+
+        [Route("api/cambiarContrasenna")]
+        [AllowAnonymous]
+        [HttpPut]
+        public int cambiarContraseña(UsuariosEnt usuarioActualizar)
+        {
+            return usuariosModel.cambiarContraseña(usuarioActualizar); 
         }
 
     }

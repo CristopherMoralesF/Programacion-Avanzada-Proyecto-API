@@ -9,12 +9,13 @@ using System.Web.Http;
 
 namespace Proyecto_API.Controllers
 {
+    [Authorize]
     public class IndicadoresController : ApiController
     {
 
         IndicadoresModel indicadoresModel = new IndicadoresModel();
 
-        [Route("api/indidcadores/optenerIndicadores")]
+        [Route("api/indicadores/optenerIndicadores")]
         [HttpGet]
         public IndicadoresEnt optenerIndicadores(int idUsuario)
         {

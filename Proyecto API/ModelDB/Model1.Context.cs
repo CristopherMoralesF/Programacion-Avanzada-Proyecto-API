@@ -56,6 +56,7 @@ namespace Proyecto_API.ModelDB
         public virtual DbSet<RESUMEN_ACTIVOS_CLASE> RESUMEN_ACTIVOS_CLASE { get; set; }
         public virtual DbSet<VALIDACION_RIESGO_CLASE> VALIDACION_RIESGO_CLASE { get; set; }
         public virtual DbSet<RESUMEN_VALIDACIONES_COMPLETAS> RESUMEN_VALIDACIONES_COMPLETAS { get; set; }
+        public virtual DbSet<BITACORA_ERRORES> BITACORA_ERRORES { get; set; }
     
         public virtual int ACTUALIZAR_INFORMACION_VALIDACION(Nullable<int> iN_ID_ACTIVO, Nullable<int> iN_ID_TIPO_VALIDACION, string iN_VALOR_VALIDACION)
         {
@@ -159,6 +160,19 @@ namespace Proyecto_API.ModelDB
                 new ObjectParameter("IN_USEFULL_LIFE", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CREAR_CLASE", iN_CLASS_DESCRIPTIONParameter, iN_ASSET_ACCOUNTParameter, iN_DEP_ACUM_ACCOUNTParameter, iN_EXPENSE_ACCOUNTParameter, iN_USEFULL_LIFEParameter);
+        }
+    
+        public virtual int MODIFICAR_CLASE(Nullable<int> iN_ID_ACTIVO, Nullable<int> iN_ID_NUEVA_CLASE)
+        {
+            var iN_ID_ACTIVOParameter = iN_ID_ACTIVO.HasValue ?
+                new ObjectParameter("IN_ID_ACTIVO", iN_ID_ACTIVO) :
+                new ObjectParameter("IN_ID_ACTIVO", typeof(int));
+    
+            var iN_ID_NUEVA_CLASEParameter = iN_ID_NUEVA_CLASE.HasValue ?
+                new ObjectParameter("IN_ID_NUEVA_CLASE", iN_ID_NUEVA_CLASE) :
+                new ObjectParameter("IN_ID_NUEVA_CLASE", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("MODIFICAR_CLASE", iN_ID_ACTIVOParameter, iN_ID_NUEVA_CLASEParameter);
         }
     }
 }

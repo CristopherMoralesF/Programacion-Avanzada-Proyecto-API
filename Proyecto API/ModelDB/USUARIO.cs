@@ -26,6 +26,7 @@ namespace Proyecto_API.ModelDB
         public string CONTRASENNA { get; set; }
         public int ID_ROLE { get; set; }
         public int ESTADO { get; set; }
+        public int ESTADO_CONTRASENNA { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ACTIVO> ACTIVO { get; set; }

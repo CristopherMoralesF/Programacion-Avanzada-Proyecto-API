@@ -8,6 +8,7 @@ using System.Web.Http;
 
 namespace Proyecto_API.Controllers
 {
+    [Authorize]
     public class ClasesController : ApiController
     {
         ClasesModel clasesModel = new ClasesModel();

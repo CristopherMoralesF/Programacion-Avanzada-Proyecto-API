@@ -126,6 +126,7 @@
     <EntitySetMapping Name="USUARIO">
       <EntityTypeMapping TypeName="ASSET_MANAGEMENTModel.USUARIO">
         <MappingFragment StoreEntitySet="USUARIO">
+          <ScalarProperty Name="ESTADO_CONTRASENNA" ColumnName="ESTADO_CONTRASENNA" />
           <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
           <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
           <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
@@ -374,5 +375,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="BITACORA_ERRORES">
+      <EntityTypeMapping TypeName="ASSET_MANAGEMENTModel.BITACORA_ERRORES">
+        <MappingFragment StoreEntitySet="BITACORA_ERRORES">
+          <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+          <ScalarProperty Name="ERROR" ColumnName="ERROR" />
+          <ScalarProperty Name="PANTALLA" ColumnName="PANTALLA" />
+          <ScalarProperty Name="ID_ERROR" ColumnName="ID_ERROR" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="MODIFICAR_CLASE" FunctionName="ASSET_MANAGEMENTModel.Store.MODIFICAR_CLASE" />
   </EntityContainerMapping>
 </Mapping>

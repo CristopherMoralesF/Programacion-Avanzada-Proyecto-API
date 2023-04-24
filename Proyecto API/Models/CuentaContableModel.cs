@@ -3,6 +3,7 @@ using Proyecto_API.ModelDB;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Web;
 
 namespace Proyecto_API.Models
@@ -51,7 +52,10 @@ namespace Proyecto_API.Models
                 cuenta.ID_CUENTA = nuevaCuenta.idCuenta;
                 cuenta.DESCRIPCION_CUENTA = nuevaCuenta.descripcionCuenta;
                 cuenta.ID_CATEGORIA = nuevaCuenta.categoriaCuenta.idCategoria;
-                cuenta.NATURALEZA = nuevaCuenta.naturaleza; 
+                cuenta.NATURALEZA = nuevaCuenta.naturaleza;
+                cuenta.BALANCE = 0;
+                cuenta.TOTAL_DEBITOS = 0;
+                cuenta.TOTAL_CREDITOS = 0; 
 
                 conexion.CUENTA_CONTABLE.Add(cuenta);
                 return conexion.SaveChanges(); 
@@ -85,6 +89,24 @@ namespace Proyecto_API.Models
                 return null; 
 
             }
+        }
+
+        public Boolean validarCuentaContableClase(string idCuenta) {
+
+            using (var conexion = new ASSET_MANAGEMENTEntities())
+            {
+                var resultado = (from x in conexion.CLASE_CUENTA where x.ID_CUENTA == idCuenta select x).ToList();
+
+
+                if(resultado.Count > 0)
+                {
+                    return false;
+                } else
+                {
+                    return true; 
+                }
+            }
+        
         }
 
     }

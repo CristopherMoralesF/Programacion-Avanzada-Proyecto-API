@@ -9,6 +9,7 @@ using System.Web.Http;
 
 namespace Proyecto_API.Controllers
 {
+    [Authorize]
     public class ActivoController : ApiController
     {
         ActivoModel activoModel = new ActivoModel();
@@ -46,7 +47,14 @@ namespace Proyecto_API.Controllers
         public int crearActivo(ActivoEnt nuevoActivo)
         {
             return activoModel.crearActivo(nuevoActivo);
-        }    
+        }
+
+        [Route("api/activo/modificarClase")]
+        [HttpPut]
+        public int actualizarClaseACtivo(ActivoEnt activo)
+        {
+            return activoModel.actualizarClase(activo);
+        }
 
     }
 }

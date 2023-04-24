@@ -5,11 +5,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI.WebControls;
+using Sem1_ProyectoAPI.App_Start;
+using System.Net.Mail;
+using System.Configuration;
 
 namespace Proyecto_API.Models
 {
     public class UsuariosModel
     {
+        TokenGenerator generator = new TokenGenerator();
+
         public List<UsuariosEnt> consultarUsuarios()
         {
 
@@ -70,11 +75,14 @@ namespace Proyecto_API.Models
 
                 if(resultado != null)
                 {
+
                     nuevoUsuario.nombre = resultado.NOMBRE; 
                     nuevoUsuario.correo = resultado.CORREO;
                     nuevoUsuario.estado = resultado.ESTADO;
                     nuevoUsuario.idRole = resultado.ID_ROLE;
-                    nuevoUsuario.idUsuario = resultado.ID_USUARIO; 
+                    nuevoUsuario.idUsuario = resultado.ID_USUARIO;
+                    nuevoUsuario.estadoContrasenna = resultado.ESTADO_CONTRASENNA; 
+                    nuevoUsuario.Token = generator.GenerateTokenJwt(resultado.CORREO);
 
                     return nuevoUsuario; 
                 }
@@ -100,6 +108,71 @@ namespace Proyecto_API.Models
                 conexion.USUARIO.Add(nuevoUsuario);
                 return conexion.SaveChanges();
             }
+        }
+
+        public int restaurarContraseña(UsuariosEnt usuario)
+        {
+
+            using (var conexion = new ASSET_MANAGEMENTEntities())
+            {
+                Random rnd = new Random();
+                USUARIO usuarioModificar = (from x in conexion.USUARIO where 
+                                            x.CORREO == usuario.correo select x).FirstOrDefault();
+
+                if (usuarioModificar == null)
+                {
+                    return 0;
+                } else
+                {
+                    usuarioModificar.ESTADO_CONTRASENNA = 0; 
+                    usuarioModificar.CONTRASENNA = usuario.correo.Substring(0, 3) + rnd.Next(1, 500).ToString();
+                    
+                    return conexion.SaveChanges(); 
+                }
+
+            }
+
+        }
+
+        public int cambiarContraseña(UsuariosEnt usuario)
+        {
+            using (var conexion = new ASSET_MANAGEMENTEntities())
+            {
+                USUARIO usuarioModificar = (from x in conexion.USUARIO
+                                            where x.CORREO == usuario.correo select x).FirstOrDefault();
+
+
+                usuarioModificar.CONTRASENNA = usuario.contraseña;
+                usuarioModificar.ESTADO_CONTRASENNA = 1;
+
+                return conexion.SaveChanges();  
+
+            }
+        }
+
+        public string RestablecerContraseñaEmail(USUARIO entidad)
+        {
+
+            string correoAutentificacion = ConfigurationManager.AppSettings["correoEmails"];
+            string contrasennaAutentificacion = ConfigurationManager.AppSettings["contrasennaEmails"];
+
+            MailMessage msg = new MailMessage();
+            msg.To.Add(new MailAddress(entidad.CORREO, entidad.CORREO));
+            msg.From = new MailAddress("cmorales40146@ufide.ac.cr", "Mi Sistema");
+            msg.Subject = "Recuperación de Contraseña";
+            msg.Body = "Nuestro sistema registro una solicitud de cambio de contraseña, al ingresar, procesa a cambiar su contraseña: " + entidad.CONTRASENNA;
+            msg.IsBodyHtml = true;
+
+            SmtpClient client = new SmtpClient();
+            client.UseDefaultCredentials = false;
+            client.Credentials = new System.Net.NetworkCredential(correoAutentificacion, contrasennaAutentificacion);
+            client.Port = 587; // You can use Port 25 if 587 is blocked (mine is!)
+            client.Host = "smtp.office365.com";
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.EnableSsl = true;
+            client.Send(msg);
+
+            return "exito";
         }
 
         public int activarUsuario(int usuarioID)

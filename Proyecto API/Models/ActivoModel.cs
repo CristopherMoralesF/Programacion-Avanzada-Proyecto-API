@@ -171,5 +171,14 @@ namespace Proyecto_API.Models
 
         }
 
+        public int actualizarClase(ActivoEnt activo)
+        {
+            using (var conexion = new ASSET_MANAGEMENTEntities())
+            {
+                conexion.MODIFICAR_CLASE(activo.idActivo, activo.claseActivo.idClase);
+                return conexion.SaveChanges(); 
+            }
+
+        }
     }
 }

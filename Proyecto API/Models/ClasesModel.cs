@@ -60,6 +60,33 @@ namespace Proyecto_API.Models
             }
         }
 
+        public List<ValidacionClaseEnt> consultarValidacionesClase(int idClase)
+        {
+            using (var conexion = new ASSET_MANAGEMENTEntities())
+            {
+
+                var validacionesClase = (from x in conexion.TIPO_VALIDACION
+                                         where x.ID_CLASE == idClase select x).ToList();
+
+                List<ValidacionClaseEnt> listaValidaciones = new List<ValidacionClaseEnt>();
+
+
+                foreach (var validacion in validacionesClase)
+                {
+
+                    listaValidaciones.Add(new ValidacionClaseEnt
+                    {
+                        idValidacion = validacion.ID_TIPO_VALIDACION,
+                        descripcionValidacion = validacion.DESCRIPCION_VALIDACION
+                    });
+                }
+
+
+                return listaValidaciones;
+
+            }
+        }
+
         public ClaseEnt consultarClase(int idClase)
         {
             using (var conexion = new ASSET_MANAGEMENTEntities())
@@ -72,6 +99,7 @@ namespace Proyecto_API.Models
                 claseOutput.idClase = clase.ID_CLASE;
                 claseOutput.descripcionClase = clase.DESCRIPCION_CLASE;
                 claseOutput.vidaUtil = (int)clase.VIDA_UTIL; 
+                claseOutput.listaValidaciones = consultarValidacionesClase(clase.ID_CLASE);
 
                 return claseOutput;
             }
